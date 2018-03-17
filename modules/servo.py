@@ -2,10 +2,7 @@
 
 import RPi.GPIO as GPIO
 from time import sleep
-import signal
-import atexit
-#GPIO.setmode(GPIO.BCM)
-#atexit.register(GPIO.cleanup)  
+
 class Servo:
 	def __init__(self, pin):
 		self.pin = pin

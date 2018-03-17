@@ -6,9 +6,8 @@ import atexit
 atexit.register(GPIO.cleanup)  
 
 def main():
-	#GPIO.setmode(GPIO.BCM)
-	print pd.servopin	
-	myServo = servo.Servo(pd.servopin)
+	print pd.ServoPin	
+	myServo = servo.Servo(pd.ServoPin)
 	angles = [10, 180, 45, 135, 90]
 	for i in range(5):
 		for angle in angles:

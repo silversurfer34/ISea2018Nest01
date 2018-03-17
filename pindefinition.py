@@ -1,4 +1,7 @@
 import RPi.GPIO as GPIO
 
-servopin = 17
+ServoPin = 17
+MotorPin_A = 23
+MotorPin_B = 24
+
 GPIO.setmode(GPIO.BCM)
