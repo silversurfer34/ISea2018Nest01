@@ -1,7 +1,8 @@
 export interface RouteFromDb {
     name: string,
     date: string,
-    fileName: string
+    fileName: string,
+    type: string
 }
 
 export interface Point{
