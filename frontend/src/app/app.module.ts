@@ -1,11 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireModule } from 'angularfire2';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './material/material.module';
+import { BackendService } from './backend/backend.service';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -17,9 +21,11 @@ import { MaterialModule } from './material/material.module';
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
-  providers: [],
+  providers: [BackendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

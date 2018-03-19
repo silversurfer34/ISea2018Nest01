@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { BackendService } from '../backend/backend.service';
+import { Observable } from 'rxjs/Observable';
+import { RouteFromDb } from '../datamodel/datamodel';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  existingRoutes: Observable<RouteFromDb[]>;
+
+  constructor(
+    private backend: BackendService
+  ) { 
+    this.backend.getExistingRoutes().subscribe( changed => console.log(changed)) ;
+  }
 
   ngOnInit() {
   }
