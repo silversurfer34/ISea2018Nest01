@@ -6,13 +6,13 @@ import atexit
 atexit.register(GPIO.cleanup)  
 
 def main():
-	print pd.ServoPin	
 	myServo = servo.Servo(pd.ServoPin)
-	angles = [10, 180, 45, 135, 90]
-	for i in range(5):
+	angles = [0, 45, 60, 45, 0, -35, -50, -35, 60, -50, 0]
+	for i in range(10):
 		for angle in angles:
-			print "Setting angle", angle
+			#print "Setting angle", angle
 			myServo.setAngle(angle)
+			#time.sleep(0.1)
 	myServo.cleanup();
 
 	
