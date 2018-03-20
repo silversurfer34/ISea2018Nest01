@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { BackendService } from '../backend/backend.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-upload-route',
@@ -11,8 +12,6 @@ export class UploadRouteComponent implements OnInit {
   @ViewChild("routeFileSelection") routeFileSelection: ElementRef;
   @ViewChild("traceFileSelection") traceFileSelection: ElementRef;
 
-  newRouteFormGroup: FormGroup;
-
   routeName: FormControl;
   routeDate: FormControl;  
   traceDate: FormControl;
@@ -21,17 +20,13 @@ export class UploadRouteComponent implements OnInit {
   traceFile: File;
 
   constructor(
-    private fb: FormBuilder,
-    private backend: BackendService
+    private backend: BackendService,
+    public dialogRef: MatDialogRef<UploadRouteComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { 
-    this.routeName = fb.control('', Validators.required);
-    this.routeDate = fb.control(new Date());  
-    this.traceDate = fb.control(new Date());    
-    this.newRouteFormGroup = fb.group({
-      routeName: this.routeName,
-      routeDate: this.routeDate,
-      traceDate: this.traceDate
-    })
+    this.routeName = new FormControl('', Validators.required);
+    this.routeDate = new FormControl(new Date());  
+    this.traceDate = new FormControl(new Date());
   }
   
   ngOnInit() {
@@ -46,7 +41,7 @@ export class UploadRouteComponent implements OnInit {
   }
 
   apply() {        
-    if(this.newRouteFormGroup.valid){   
+    if(this.isFormValid()){   
       this.backend.addRoute(this.routeName.value, this.routeDate.value, this.routeFile, this.traceDate.value, this.traceFile);
       this.routeFileSelection.nativeElement.value = "";
       this.traceFileSelection.nativeElement.value = "";
@@ -62,5 +57,13 @@ export class UploadRouteComponent implements OnInit {
 
   onRouteFileSelection(files: FileList){
     this.routeFile = files[0];
+  }
+
+  close(): void {
+    this.dialogRef.close();
+  }
+
+  isFormValid(){
+    return !this.routeName.valid;
   }
 }

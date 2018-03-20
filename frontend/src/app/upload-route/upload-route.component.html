@@ -1,28 +1,38 @@
-<form (ngSubmit)="apply()" [formGroup]="newRouteFormGroup">
-  <mat-form-field>
-      <input matInput placeholder="Route name" value="" [formControl]="newRouteFormGroup.controls.routeName" type="text" required>
-  </mat-form-field>
+<h1 mat-dialog-title>Add a new route</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <!-- <mat-form-field>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field> -->
 
-  <mat-form-field>
-    <input matInput [matDatepicker]="routeDatePicker" placeholder="Route date" [formControl]="newRouteFormGroup.controls.routeDate">
-    <mat-datepicker-toggle matSuffix [for]="routeDatePicker"></mat-datepicker-toggle>
-    <mat-datepicker #routeDatePicker></mat-datepicker>
-  </mat-form-field>
-  
-  <button mat-raised-button color="primary" type="button" (click)="openRouteFileSelection()">
-      Add a route file... <input #routeFileSelection type="file" accept=".json" style="display: none;" (change)="onRouteFileSelection($event.currentTarget.files)">
-  </button>
+      <mat-form-field>
+          <input matInput placeholder="Route name" value="" [formControl]="routeName" type="text" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <input matInput [matDatepicker]="routeDatePicker" placeholder="Route date" [formControl]="routeDate">
+        <mat-datepicker-toggle matSuffix [for]="routeDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #routeDatePicker></mat-datepicker>
+      </mat-form-field>
+      
+      <button mat-raised-button color="primary" type="button" (click)="openRouteFileSelection()">
+          Add a route file... <input #routeFileSelection type="file" accept=".json" style="display: none;" (change)="onRouteFileSelection($event.currentTarget.files)">
+      </button>
+    
+      <mat-form-field>
+        <input matInput [matDatepicker]="traceDatePicker" placeholder="Trace date" [formControl]="traceDate">
+        <mat-datepicker-toggle matSuffix [for]="traceDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #traceDatePicker></mat-datepicker>
+      </mat-form-field>
+    
+      <button mat-raised-button color="primary" type="button" (click)="openTraceFileSelection()">
+          Add a trace file... <input #traceFileSelection type="file" accept=".json" style="display: none;" (change)="onTraceFileSelection($event.currentTarget.files)">
+      </button> 
+    
+       
 
-  <mat-form-field>
-    <input matInput [matDatepicker]="traceDatePicker" placeholder="Trace date" [formControl]="newRouteFormGroup.controls.traceDate">
-    <mat-datepicker-toggle matSuffix [for]="traceDatePicker"></mat-datepicker-toggle>
-    <mat-datepicker #traceDatePicker></mat-datepicker>
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" type="button" (click)="openTraceFileSelection()">
-      Add a trace file... <input #traceFileSelection type="file" accept=".json" style="display: none;" (change)="onTraceFileSelection($event.currentTarget.files)">
-  </button> 
-
+</div>
+<div mat-dialog-actions>
   <button mat-raised-button type="button" (click)="close()">Cancel</button>
-  <button mat-raised-button color="primary" [disabled]="newRouteFormGroup.invalid" type="submit">Create</button>  
-</form>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="isFormValid()">Create</button> 
+</div>
