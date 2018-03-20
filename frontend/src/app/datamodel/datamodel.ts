@@ -1,4 +1,5 @@
-export interface RouteFromDb {
+export interface RouteInfoFromDb {
+    id: number,
     name: string,
     date: string,
     fileName: string,
@@ -13,6 +14,11 @@ export interface Point{
     time? : number
 }
 
-export interface RouteFromStorage {
+export interface RouteData {
     points: Point[]
+}
+
+export interface RouteDataFromDb{
+    id: number,
+    data: RouteData
 }

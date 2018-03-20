@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../backend/backend.service';
 import { Observable } from 'rxjs/Observable';
-import { RouteFromDb } from '../datamodel/datamodel';
+import { RouteInfoFromDb } from '../datamodel/datamodel';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-home',
@@ -10,12 +11,14 @@ import { RouteFromDb } from '../datamodel/datamodel';
 })
 export class HomeComponent implements OnInit {
 
-  existingRoutes: Observable<RouteFromDb[]>;
+  existingRoutes: Observable<RouteInfoFromDb[]>;
 
   constructor(
-    private backend: BackendService
+    private backend: BackendService,
+    private store: Store<any>
   ) { 
-    this.backend.getExistingRoutes().subscribe( changed => console.log(changed)) ;
+    this.backend.getExistingRoutes().subscribe( changed => console.log(changed)) ;    
+    this.store.select('app', 'displayedRoute').map(val => console.log(val)).subscribe();    
   }
 
   ngOnInit() {
