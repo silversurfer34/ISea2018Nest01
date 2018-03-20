@@ -41,6 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [BackendService],
+  entryComponents: [UploadRouteComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,6 +23,13 @@ export function AppReducer(state: App, action: AppAction): App {
         message: ''
       }
     }
+
+    case 'OPEN_UPLOAD_DIALOG': {
+      return {
+        ...state,
+        openUploadDialog: action.payload
+      }
+    }
       
     default: {
       return state;
