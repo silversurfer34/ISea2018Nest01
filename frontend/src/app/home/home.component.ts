@@ -24,9 +24,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  private onFileSelection(files: FileList) {    
-    for (let index = 0, file: File; file = files[index]; index++) {
-      this.backend.addRoute("new name", "now", file, "planned");
-    }
+  private onFileSelection(files: FileList) {  
+    var file = files[0];
+    this.backend.addRoute("new name", "now", undefined, "now", undefined);
   }
 }

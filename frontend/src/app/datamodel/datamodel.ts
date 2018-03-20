@@ -1,9 +1,10 @@
 export interface RouteInfoFromDb {
     id: number,
     name: string,
-    date: string,
-    fileName: string,
-    type: string
+    plannedDate: string,
+    plannedFileName: string,
+    doneDate: string,
+    doneFileName: string    
 }
 
 export interface Point{
@@ -20,5 +21,6 @@ export interface RouteData {
 
 export interface RouteDataFromDb{
     id: number,
-    data: RouteData
+    plannedRoute: RouteData,
+    doneRoute: RouteData
 }
