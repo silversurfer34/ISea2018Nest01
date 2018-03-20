@@ -16,10 +16,10 @@ atexit.register(cleanup)
 
 def main():
 	angles = [0, 45, 90, 135, 180, 135, 90, 45]
-	#while(True):
-	for angle in angles:
-		myServo.setAngle(angle)
-		time.sleep(3)
+	while(True):
+		for angle in angles:
+			myServo.setAngle(angle)
+			time.sleep(3)
 
 	
 if __name__ == "__main__":
