@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Add a new route</h1>
-<div mat-dialog-content>
+<div mat-dialog-content class="form-content">
   <!-- <mat-form-field>
     <input matInput [(ngModel)]="data.animal">
   </mat-form-field> -->
@@ -14,7 +14,7 @@
     <mat-datepicker #routeDatePicker></mat-datepicker>
   </mat-form-field>
   
-  <button mat-raised-button color="primary" type="button" (click)="openRouteFileSelection()">
+  <button mat-raised-button class="inputFile" color="primary" type="button" (click)="openRouteFileSelection()">
       Add a route file... <input #routeFileSelection type="file" accept=".json" style="display: none;" (change)="onRouteFileSelection($event.currentTarget.files)">
   </button>
 
@@ -24,11 +24,11 @@
     <mat-datepicker #traceDatePicker></mat-datepicker>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" type="button" (click)="openTraceFileSelection()">
+  <button mat-raised-button class="inputFile" color="primary" type="button" (click)="openTraceFileSelection()">
       Add a trace file... <input #traceFileSelection type="file" accept=".json" style="display: none;" (change)="onTraceFileSelection($event.currentTarget.files)">
   </button>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions class="form-footer">
   <button mat-raised-button type="button" (click)="close()">Cancel</button>
   <button mat-raised-button color="primary" (click)="apply()" [disabled]="isFormInvalid()">Create</button> 
 </div>

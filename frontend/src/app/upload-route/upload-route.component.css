@@ -1,0 +1,11 @@
+.form-footer{
+    justify-content: space-between;
+}
+
+.inputFile{
+    margin-bottom: 1.25em
+}
+
+.form-content{
+    display: grid;
+}

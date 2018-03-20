@@ -32,7 +32,7 @@ export class AppComponent {
 
   launchDialog() {
     let dialogRef = this.dialog.open(UploadRouteComponent, {
-      width: '650px'
+      width: '350px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
