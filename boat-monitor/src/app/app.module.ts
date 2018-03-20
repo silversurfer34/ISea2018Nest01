@@ -3,14 +3,20 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { AgmCoreModule } from '@agm/core';
+import { BoatMapComponent } from './boat-map/boat-map.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BoatMapComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AgmCoreModule.forRoot({
+      // apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
