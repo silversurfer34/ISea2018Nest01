@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 export class BackendService {
 
   private readonly routesInfoDb: string = 'routesInfo';
-  private readonly routesDataDb: string = 'routesData';
+  private readonly routesDataDb: string = 'routesData';  
 
   constructor(
     private db: AngularFirestore,
@@ -33,37 +33,84 @@ export class BackendService {
   })).catch(err => console.log(err));    
   }
 
-  addRoute(name: string, date: string, file: File, type: string){
+  addRoute(name: string, plannedDate: string, plannedFile: File, doneDate: string, doneFile: File){
     const timestamp = +new Date();
+    let plannedFileName = '';
+    let doneFileName = '';
+
+    let filesToSave=[];
+    if( plannedFile ) {
+      plannedFileName = timestamp.toString() + '-' + plannedFile.name;
+      filesToSave.push(plannedFile);
+    }
+    if( doneFile ) {
+      doneFileName = timestamp.toString() + '-' + doneFile.name;
+      filesToSave.push(doneFile);
+    }
+    
+    if(filesToSave.length > 0){
+      this.saveRouteInfo(name, plannedDate, plannedFileName, doneDate, doneFileName, timestamp);
+
+      this.loadAndSaveRouteData(filesToSave, timestamp);
+      
+      this.saveFile(filesToSave, [plannedFileName, doneFileName], timestamp);
+    }
+    else{
+      this.store.dispatch({
+        type: 'SET_SNACKBAR_MESSAGE',
+        payload: 'Nothing to save'
+      })
+    }
+  }  
+
+  saveRouteInfo(name: string, plannedDate: string, plannedFileName: string, doneDate: string, doneFileName: string, timestamp: number){    
     this.db.collection<RouteInfoFromDb>(this.routesInfoDb).add({
       id: timestamp,
       name: name,
-      date: date,
-      fileName: file.name,
-      type: type
+      plannedDate: plannedDate,
+      plannedFileName: plannedFileName,
+      doneDate: doneDate,
+      doneFileName: doneFileName
     }).catch( err => console.log(err));
-    
-    const fileReader = new FileReader();    
-    var jsonContent;
-    let me = this;
-    fileReader.onload = function (evt) {        
-        jsonContent = JSON.parse(fileReader.result);
-        me.db.collection<RouteDataFromDb>(me.routesDataDb).add({
-          id: timestamp,
-          data: jsonContent as RouteData
-        }).catch( err => console.log(err));
-    };
-    fileReader.readAsText(file);
+  }
 
-    this.storage.upload(file.name, file)
-    .then( snapshot => {      
-      me.store.dispatch({
-        type: 'SET_SNACKBAR_MESSAGE',
-        payload: 'File uploaded'
-      })      
-    })
-    .catch( error => {
-      console.log('error');
-    });    
-  }  
+  loadAndSaveRouteData(files: File[], timestamp: number){
+    var reader = new FileReader(); 
+    let me = this;    
+    function readFile(index, content) {      
+      if( index >= files.length){        
+        const routeDataToSave: RouteDataFromDb = {
+          id: timestamp,
+          plannedRoute: content[0] || {},
+          doneRoute: content[1] || {}
+        }
+        me.db.collection<RouteDataFromDb>(me.routesDataDb).add(
+          routeDataToSave
+        )
+        .then( value =>  me.store.dispatch({
+            type: 'SET_SNACKBAR_MESSAGE',
+            payload: 'Route saved'
+          })
+        )
+        .catch( err => console.log(err)); 
+        return;        
+      }
+
+      var file = files[index];
+      reader.onload = function(e) {         
+        content.push(JSON.parse(reader.result));
+        readFile(index+1, content);        
+      }
+      reader.readAsText(file);      
+      return content;
+    }    
+    readFile(0, []); 
+  }
+
+  saveFile(filesToSave: File[], fileNames: string[], timestamp: number){
+    filesToSave.forEach( ( file, index) => {
+      this.storage.upload(fileNames[index], file )
+      .catch( error => console.log("error"));
+    });
+  }
 }
