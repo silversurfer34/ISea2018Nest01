@@ -8,6 +8,9 @@
 
   <mat-sidenav-content>
     <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p>
-    content
+
+      <input type="file" accept=".json" (change)="onFileSelection($event.currentTarget.files);">
+
+
   </mat-sidenav-content>
 </mat-sidenav-container>
