@@ -41,13 +41,9 @@ export class UploadRouteComponent implements OnInit {
   }
 
   apply() {        
-    if(this.isFormValid()){   
-      this.backend.addRoute(this.routeName.value, this.routeDate.value, this.routeFile, this.traceDate.value, this.traceFile);
-      this.routeFileSelection.nativeElement.value = "";
-      this.traceFileSelection.nativeElement.value = "";
-      this.routeFile = undefined;
-      this.traceFile = undefined;
-      this.routeName.reset();
+    if(!this.isFormInvalid()){   
+      this.backend.addRoute(this.routeName.value, this.routeDate.value, this.routeFile, this.traceDate.value, this.traceFile);      
+      this.close();
     }
   }
 
@@ -63,7 +59,7 @@ export class UploadRouteComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  isFormValid(){
+  isFormInvalid(){
     return !this.routeName.valid;
   }
 }

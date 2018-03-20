@@ -30,23 +30,17 @@ export class AppComponent {
     this.store.select('app', 'openUploadDialog').subscribe( val => { if(val){this.launchDialog()} });
   }
 
-  launchDialog(): void {
+  launchDialog() {
     let dialogRef = this.dialog.open(UploadRouteComponent, {
-      width: '650px',
-      //data: { name: this.name, animal: this.animal }
+      width: '650px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      // this.animal = result.animal;
+      this.store.dispatch({
+        type: 'OPEN_UPLOAD_DIALOG',
+        payload: false
+      });
     });
-
-    this.store.dispatch({
-      type: 'OPEN_UPLOAD_DIALOG',
-      payload: false
-    })
-    console.log("time to upload");
   }
 
   openUploadDialog(){
