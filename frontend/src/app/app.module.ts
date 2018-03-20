@@ -11,6 +11,12 @@ import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './material/material.module';
 import { BackendService } from './backend/backend.service';
 import { environment } from '../environments/environment';
+import { StoreModule } from '@ngrx/store';
+import { AppReducer } from './+state/app.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './+state/app.effects';
+import { AppInitialState } from './+state/app.init';
 
 
 @NgModule({
@@ -25,7 +31,10 @@ import { environment } from '../environments/environment';
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    StoreModule.forRoot({app: AppReducer}, {initialState: {app: AppInitialState} }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [BackendService],
   bootstrap: [AppComponent]
