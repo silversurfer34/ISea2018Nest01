@@ -18,7 +18,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './+state/app.effects';
 import { AppInitialState } from './+state/app.init';
 
-
 @NgModule({
   declarations: [
     AppComponent,

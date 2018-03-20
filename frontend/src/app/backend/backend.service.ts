@@ -57,7 +57,10 @@ export class BackendService {
 
     this.storage.upload(file.name, file)
     .then( snapshot => {      
-      console.log('file uploaded');
+      me.store.dispatch({
+        type: 'SET_SNACKBAR_MESSAGE',
+        payload: 'File uploaded'
+      })      
     })
     .catch( error => {
       console.log('error');

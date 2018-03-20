@@ -1,22 +1,20 @@
 import { RouteDataFromDb } from "../datamodel/datamodel";
 
-
-export interface LoadLqc {
-  type: 'LOAD_LQC';
-  payload: string;
-}
-
 export interface AddRouteData {
   type: 'ADD_ROUTE_DATA';
   payload: RouteDataFromDb;
 }
 
-export interface LqcLoadingFailed {
-  type: 'LQC_LOADING_FAILED';
-  payload: any;
+export interface SetSnackbarMessage {
+  type: 'SET_SNACKBAR_MESSAGE';
+  payload: string;
+}
+
+export interface ClearSnackbarMessage {
+  type: 'CLEAR_SNACKBAR_MESSAGE';
 }
 
 export type AppAction = 
-LoadLqc 
-| AddRouteData 
-| LqcLoadingFailed;
+AddRouteData 
+| SetSnackbarMessage
+| ClearSnackbarMessage;

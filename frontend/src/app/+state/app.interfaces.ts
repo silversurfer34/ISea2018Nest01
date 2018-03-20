@@ -1,8 +1,8 @@
 import { RouteDataFromDb } from "../datamodel/datamodel";
 
 export interface App {
-  displayedRoute: RouteDataFromDb[]
-  
+  displayedRoute: RouteDataFromDb[];
+  message: string;  
 }
 
 export interface AppState {
