@@ -17,11 +17,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './+state/app.effects';
 import { AppInitialState } from './+state/app.init';
+import { UploadRouteComponent } from './upload-route/upload-route.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    UploadRouteComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,9 @@ import { AppInitialState } from './+state/app.init';
     AngularFirestoreModule,
     StoreModule.forRoot({app: AppReducer}, {initialState: {app: AppInitialState} }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [BackendService],
   bootstrap: [AppComponent]
