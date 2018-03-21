@@ -8,3 +8,6 @@
        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
   }
+.appName{
+    margin: 0 0 0 50px;
+}
