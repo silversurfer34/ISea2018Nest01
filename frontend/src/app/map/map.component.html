@@ -1,3 +1,21 @@
-<p>
-  map works!
-</p>
+<agm-map 
+  [latitude]="lat" 
+  [longitude]="lng" 
+  [fitBounds]="globalBounds"
+  #gm
+>
+  <agm-polyline [strokeColor]="routeColor">
+    <agm-polyline-point *ngFor="let point of routePoints" [latitude]="point.latitude" [longitude]="point.longitude"></agm-polyline-point>
+  </agm-polyline>>
+
+  <agm-polyline [strokeColor]="traceColor">
+      <agm-polyline-point *ngFor="let point of tracePoints" [latitude]="point.latitude" [longitude]="point.longitude"></agm-polyline-point>
+  </agm-polyline>>
+  <!-- <agm-polygon [paths]="routePolygon" [strokeWeight]="2" [strokeColor]="blue" [clickable]="false"></agm-polygon> -->
+  <!--<agm-polygon [paths]="tracePolygon" [strokeWeight]="2" [strokeColor]="red" [clickable]="false"></agm-polygon>-->
+</agm-map>
+
+<div class="viewData">
+  <button mat-raised-button *ngIf="cacheRoutePoints !== undefined" class="routeButton {{materialButtonClass}} {{routeSelected}}" (click)="showOrHideRoute()">route</button>
+  <button mat-raised-button *ngIf="cacheTracePoints !== undefined" class="traceButton {{materialButtonClass}} {{traceSelected}}" (click)="showOrHideTrace()">trace</button>
+</div>

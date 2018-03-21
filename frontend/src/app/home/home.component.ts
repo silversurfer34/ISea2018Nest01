@@ -20,8 +20,8 @@ export class HomeComponent implements OnInit {
     private backend: BackendService,
     private store: Store<any>
   ) { 
-    this.backend.getExistingRoutes().subscribe( changed => this.fillDataSource(changed)) ;    
-    this.store.select('app', 'displayedRoute').map(val => console.log(val)).subscribe();    
+    this.backend.getExistingRoutes().subscribe( changed => this.fillDataSource(changed));
+    
   }
 
   ngOnInit() {
@@ -32,16 +32,18 @@ export class HomeComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   }
 
-  private onFileSelection(files: FileList) {  
-    var file = files[0];
-    this.backend.addRoute("new name", "now", undefined, "now", undefined);
-  }
-
   onDisplayIcon(fileName, imgSrc) {
     if (fileName == "")
       return '../assets/empty.png'
     else
       return imgSrc
+  }
+
+  openUploadDialog(){
+    this.store.dispatch({
+      type: 'OPEN_UPLOAD_DIALOG',
+      payload: true
+    })
   }
 }
 

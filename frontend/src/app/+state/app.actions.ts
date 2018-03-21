@@ -19,8 +19,14 @@ export interface OpenUploadDialog {
   payload: boolean;
 }
 
+export interface AppTitleSuffix {
+  type: 'APP_TITLE_SUFFIX';
+  payload: string;
+}
+
 export type AppAction = 
 AddRouteData 
 | SetSnackbarMessage
 | ClearSnackbarMessage
-| OpenUploadDialog;
+| OpenUploadDialog
+| AppTitleSuffix;

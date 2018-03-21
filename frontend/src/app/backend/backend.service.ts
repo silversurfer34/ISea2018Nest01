@@ -21,6 +21,18 @@ export class BackendService {
     return this.db.collection<RouteInfoFromDb>(this.routesInfoDb).valueChanges();
   }
 
+  getRouteName(routeId: number){
+    let me = this;
+    this.db.collection<RouteInfoFromDb>(this.routesInfoDb).ref.where('id', '==', routeId ).get().then( res => res.forEach(function(doc) {
+      // doc.data() is never undefined for query doc snapshots
+      let result = doc.data() as RouteInfoFromDb;         
+      me.store.dispatch({
+        type: 'APP_TITLE_SUFFIX',
+        payload: result.name
+      })      
+    })).catch(err => console.log(err));    
+  }
+
   getRouteData(routeId: number){    
     let me = this;
     this.db.collection<RouteDataFromDb>(this.routesDataDb).ref.where('id', '==', routeId ).get().then( res => res.forEach(function(doc) {

@@ -6,8 +6,10 @@ export function AppReducer(state: App, action: AppAction): App {
 
   switch (action.type) {
     case 'ADD_ROUTE_DATA': {      
-      state.displayedRoute.push(action.payload);      
-      return state;
+      return{
+        ...state,
+        displayedRoute: [action.payload]
+      }
     }
 
     case 'SET_SNACKBAR_MESSAGE': {
@@ -28,6 +30,13 @@ export function AppReducer(state: App, action: AppAction): App {
       return {
         ...state,
         openUploadDialog: action.payload
+      }
+    }
+
+    case 'APP_TITLE_SUFFIX':{
+      return{
+        ...state,
+        appSuffix: action.payload
       }
     }
       

@@ -1,16 +1,19 @@
-<div class="example-container mat-elevation-z8">
+<div class="bandeau">
+  <button mat-raised-button color="primary" class="buttonAdd" (click)="openUploadDialog()"><img src="../assets/add.png" height="24" width="24"></button>
+</div>
+<div>
 <mat-table #table [dataSource]="dataSource" matSort>
 
     <!-- route exist -->
     <ng-container matColumnDef="route">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Route</mat-header-cell>
-      <mat-cell *matCellDef="let element">  <img [src]="onDisplayIcon(element.routeFileName, '../assets/checkmark-16.png')"></mat-cell>
+      <mat-cell *matCellDef="let element">  <img [src]="onDisplayIcon(element.routeFileName, '../assets/checkmark-16.png')" class="iconCheck"></mat-cell>
     </ng-container>
 
     <!-- trace done -->
     <ng-container matColumnDef="trace">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Trace</mat-header-cell>
-      <mat-cell *matCellDef="let element"> <img [src]="onDisplayIcon(element.traceFileName, '../assets/checkmark-16.png')"> </mat-cell>
+      <mat-cell *matCellDef="let element"> <img [src]="onDisplayIcon(element.traceFileName, '../assets/checkmark-16.png')" class="iconCheck"> </mat-cell>
     </ng-container>
 
     <!-- route name -->
@@ -22,15 +25,15 @@
     <!-- trace date -->
     <ng-container matColumnDef="date">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Trace date</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.traceDate}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.traceDate | date : 'MM/dd/yyyy @ h:mma'}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="launchMapView">
-        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-        <mat-cell *matCellDef="let element" ><a routerLink="/map/{{element.id}}"> <img src="../assets/seaMap.png" class="iconRoute" height="32" width="32"></a> </mat-cell>
-      </ng-container>
+        <mat-header-cell *matHeaderCellDef mat-sort-header ></mat-header-cell>
+        <mat-cell *matCellDef="let element"><a routerLink="/map/{{element.id}}"> <img src="../assets/seaMap.png" class="iconRoute" height="32" width="32"></a> </mat-cell>
+    </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns" class="mapColumnHeader"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="mapColumnHeader"></mat-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
   </mat-table>
 </div>

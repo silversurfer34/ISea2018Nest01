@@ -3,9 +3,45 @@
 }
 
 .mat-row .iconRoute{
+  height:32px;
+  width:32px;
+  margin-right:100px;
+}
+
+.mat-row .iconCheck{
+  margin-left:10px;
+}
+
+.mat-row:hover {
+  background: rgba(0,0,0,.04);
+}
+
+.mat-row .iconRoute{
   display:none;
+}
+
+.mat-column-launchMapView {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .mat-header-cell {
   font-size: large;
+}
+
+.mat-header-row{
+border-color: rgb(170, 170, 170);
+border-width: 2px;
+}
+
+.bandeau{
+  height: 60px;
+  display: flex;
+  align-items: center;
+
+}
+
+.buttonAdd{
+  margin-left: 20px;
+  min-width: 36px;
 }
