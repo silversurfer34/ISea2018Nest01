@@ -19,12 +19,14 @@ import { AppEffects } from './+state/app.effects';
 import { AppInitialState } from './+state/app.init';
 import { UploadRouteComponent } from './upload-route/upload-route.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    UploadRouteComponent
+    UploadRouteComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

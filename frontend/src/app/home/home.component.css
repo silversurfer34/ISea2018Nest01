@@ -5,3 +5,7 @@
 .mat-row .iconRoute{
   display:none;
 }
+
+.mat-header-cell {
+  font-size: large;
+}
