@@ -19,6 +19,7 @@ class GPSPosition:
     horizontal_dil = None
        
     def refresh(self, serialPort):
+        print ("refresh")
         while True:
             data =serialPort.readline()
             data = data.decode('ascii', errors='ignore')
@@ -32,31 +33,27 @@ class GPSPosition:
                 #print (gp.timestamp)
                 self.num_sats = gp.num_sats
                 self.horizontal_dil = gp.horizontal_dil
-                #print (self.num_sats)
-                #print (self.horizontal_dil)
+                #print (self.num_sats, self.horizontal_dil)
             elif 'RMC' == gp.sentence_type:
-                print (gp.sentence_type)
+                #print (gp.sentence_type)
                 self.timestamp = gp.timestamp
                 self.longitude = gp.longitude
                 self.latitude = gp.latitude
                 self.speed = gp.spd_over_grnd
                 self.direction = gp.true_course
-                #print (self.timestamp)
-                #print (self.longitude)
-                #print (self.latitude)
-                #print (self.speed)
-                #print (self.direction)
+                #print (self.timestamp, self.longitude, self.latitude, self.speed, self.direction)
 
     def run(self):
         port = "/dev/serial0"
         serialPort = serial.Serial(port, 38400, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE)
         serialPort.write(MEAS_1_s)
         serialPort.flushInput()
-        refreshThread = threading.Thread(target=refresh, args=(self, serialPort))
+        refreshThread = threading.Thread(target=GPSPosition.refresh, args=(self, serialPort))
         refreshThread.start()        
     
 
-
+#aGPS = GPSPosition()
+#aGPS.run()
         
 
 
