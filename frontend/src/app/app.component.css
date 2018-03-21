@@ -2,3 +2,12 @@
     height:26px; 
     margin: 0 4px 3px 0;
 }
+
+.example-fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+.appName{
+    margin: 0 0 0 50px;
+}
