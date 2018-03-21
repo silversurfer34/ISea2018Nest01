@@ -15,7 +15,7 @@ import { BoatMapComponent } from './boat-map/boat-map.component';
   imports: [
     BrowserModule,
     AgmCoreModule.forRoot({
-      // apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
+      apiKey: 'AIzaSyCOh39h8mm8x3tsXOidh6weLnbZEC6gebU'
     })
   ],
   providers: [],

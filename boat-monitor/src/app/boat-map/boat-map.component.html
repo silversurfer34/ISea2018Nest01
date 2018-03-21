@@ -1,5 +1,14 @@
-<p>
-  boat-map works!
-</p>
-<p>{{hero}}</p>
-<agm-map [latitude]="lat" [longitude]="lng"></agm-map>
+<agm-map [latitude]="lat" [longitude]="lng" (mapClick)="onChoseLocation($event)">
+  <agm-marker
+    [latitude]="current_marker_lat"
+    [longitude]="current_marker_lng"
+    iconUrl="assets/boat_current.svg"
+    ></agm-marker>
+
+  <agm-marker
+    [latitude]="dest_marker_lat"
+    [longitude]="dest_marker_lng"
+    iconUrl="assets/boat_dest.svg"
+    *ngIf="destChosen"></agm-marker>
+
+</agm-map>
