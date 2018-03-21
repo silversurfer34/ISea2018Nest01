@@ -27,10 +27,10 @@
 
     <ng-container matColumnDef="launchMapView">
         <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-        <mat-cell *matCellDef="let element"> <img src="../assets/compass.png" class="iconRoute" height="32" width="32"> </mat-cell>
+        <mat-cell *matCellDef="let element" ><a routerLink="/map/{{element.id}}"> <img src="../assets/seaMap.png" class="iconRoute" height="32" width="32"></a> </mat-cell>
       </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="mapColumnHeader"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="mapColumnHeader"></mat-row>
   </mat-table>
 </div>
