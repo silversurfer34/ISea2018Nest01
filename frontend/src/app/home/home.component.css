@@ -2,6 +2,16 @@
   display:block;
 }
 
+.mat-row .iconRoute{
+  height:32px;
+  width:32px;
+  margin-right:100px;
+}
+
+.mat-row .iconCheck{
+  margin-left:10px;
+}
+
 .mat-row:hover {
   background: rgba(0,0,0,.04);
 }
@@ -33,4 +43,5 @@ border-width: 2px;
 
 .buttonAdd{
   margin-left: 20px;
+  min-width: 36px;
 }
