@@ -13,8 +13,9 @@ import { Position } from '../model/position';
 })
 export class BoatMapComponent implements OnInit {
   title: string = 'Boat locator';
-  lat: number = 43.616040;
-  lng: number = 3.907910;
+  lat: number = 43.552598;
+  lng: number = 3.963800;
+  current_zoom: number = 18;
   positions: any[];
   current_marker_lat: number = null;
   current_marker_lng: number = null;
@@ -27,8 +28,8 @@ export class BoatMapComponent implements OnInit {
 
   ngOnInit() {
     this.positions = [];
-    this.current_marker_lat = 43.616040;
-    this.current_marker_lng = 3.907910;
+    this.current_marker_lat = this.lat;
+    this.current_marker_lng = this.lng;
 
     this.positionService.getPositions().subscribe((positions: Position[]) => {
       this.updatePositions(positions);
