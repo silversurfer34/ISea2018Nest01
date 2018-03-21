@@ -156,4 +156,19 @@ export class MapComponent implements OnInit {
       this.routePoints = this.cacheRoutePoints;
     }
   }
+
+  private markerTitle(point: Point){    
+    let title="";
+    if(point.bearing){
+      title += 'Bearing: ' + point.bearing + " \n";
+    }
+    if(point.speed){
+      title += 'Speed: ' + point.speed + "knots \n";
+    }
+    if(point.time){
+      const d = new Date(point.time * 1000);
+      title += 'Time: ' + d.toLocaleString();
+    }
+    return title;
+  }
 }
