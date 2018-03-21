@@ -4,6 +4,7 @@
 # Test du port série
 import serial
 import threading
+import datetime
 from pynmea2 import nmea
 
 MEAS_1_s=b"$PMTK300,1000,0,0,0,0*1C\r\n"
@@ -14,7 +15,7 @@ class GPSPosition:
     latitude = 0
     speed = None
     direction = None
-    timestamp = 0
+    datetime = None
     num_sats = None
     horizontal_dil = None
        
@@ -36,12 +37,12 @@ class GPSPosition:
                 #print (self.num_sats, self.horizontal_dil)
             elif 'RMC' == gp.sentence_type:
                 #print (gp.sentence_type)
-                self.timestamp = gp.timestamp
                 self.longitude = gp.longitude
                 self.latitude = gp.latitude
                 self.speed = gp.spd_over_grnd
                 self.direction = gp.true_course
-                #print (self.timestamp, self.longitude, self.latitude, self.speed, self.direction)
+                self.datetime = gp.datetime
+                #print (self.datetime.isoformat(), self.longitude, self.latitude, self.speed, self.direction)
 
     def run(self):
         port = "/dev/serial0"
