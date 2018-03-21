@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <div class="div-button" (click)="goHome()">
       <img src="../assets/captegg.png" height="54" width="54"> 
-      <span class="appName">iSea</span>
+      <span class="appName">iSea | {{appSuffix$ | async}}</span>
     </div>
     <span class="example-fill-remaining-space"></span>
     

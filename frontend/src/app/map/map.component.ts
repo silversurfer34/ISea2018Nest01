@@ -45,7 +45,7 @@ export class MapComponent implements OnInit {
         this.store.dispatch({
           type: "SET_SNACKBAR_MESSAGE",
           payload: 'Missing route information'
-        });                
+        });
         // this.router.navigateByUrl('/home');
       }
       this.clearData();
@@ -60,6 +60,7 @@ export class MapComponent implements OnInit {
 
   private getRouteData(){
     this.backend.getRouteData(this.routeId);
+    this.backend.getRouteName(this.routeId);
   }
 
   private handleDisplayedRoute( displayedRoute: RouteDataFromDb[] ){

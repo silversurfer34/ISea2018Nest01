@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'app';  
-
+  private appSuffix$: Observable<string>;
   constructor(
     private store: Store<any>,
     private snackbar: MatSnackBar,
@@ -30,6 +30,7 @@ export class AppComponent {
     }).subscribe();
 
     this.store.select('app', 'openUploadDialog').subscribe( val => { if(val){this.launchDialog()} });
+    this.appSuffix$ = this.store.select('app', 'appSuffix');
   }
 
   launchDialog() {
@@ -46,6 +47,10 @@ export class AppComponent {
   }
 
   goHome(){
+    this.store.dispatch({
+      type: 'APP_TITLE_SUFFIX',
+      payload: 'Home'
+    });
     this.router.navigateByUrl('/');
   }
 }

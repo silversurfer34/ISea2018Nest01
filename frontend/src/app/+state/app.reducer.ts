@@ -32,6 +32,13 @@ export function AppReducer(state: App, action: AppAction): App {
         openUploadDialog: action.payload
       }
     }
+
+    case 'APP_TITLE_SUFFIX':{
+      return{
+        ...state,
+        appSuffix: action.payload
+      }
+    }
       
     default: {
       return state;
