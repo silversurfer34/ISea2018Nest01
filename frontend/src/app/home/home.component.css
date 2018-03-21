@@ -18,3 +18,19 @@
 .mat-header-cell {
   font-size: large;
 }
+
+.mat-header-row{
+border-color: rgb(170, 170, 170);
+border-width: 2px;
+}
+
+.bandeau{
+  height: 60px;
+  display: flex;
+  align-items: center;
+
+}
+
+.buttonAdd{
+  margin-left: 20px;
+}

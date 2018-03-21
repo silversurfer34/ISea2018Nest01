@@ -1,4 +1,34 @@
 agm-map {
-    height: 100%;
-    width: 100%;
-  }
+  height: 100%;
+  width: 100%;
+}
+
+.viewData{
+  display: flex;
+  position: absolute;
+  top: 12px;
+  left: 20px;
+}
+
+.routeButton.selected{
+  background-color: #99cc00;    
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12) !important;
+}
+
+.routeButton{
+  background-color: transparent;
+  box-shadow: unset;
+  border: 2px solid #99cc00;  
+  margin-right: 5px;
+}
+
+.traceButton.selected{
+  background-color: #cc9900;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12) !important;
+}
+
+.traceButton {
+  background-color: transparent;
+  border: 2px solid #cc9900;  
+  box-shadow: unset;
+}

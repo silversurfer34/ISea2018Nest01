@@ -20,7 +20,13 @@ export class MapComponent implements OnInit {
   private routeColor = "#99cc00";
   private traceColor = "#cc9900";
   private routePoints: Point[];
+  private cacheRoutePoints: Point[];
   private tracePoints: Point[];
+  private cacheTracePoints: Point[];
+
+  private materialButtonClass = "mat-raised-button";
+  private traceSelected: string = "selected";
+  private routeSelected: string = "selected";
 
   private routeId: number;
   constructor(
@@ -60,10 +66,12 @@ export class MapComponent implements OnInit {
     this.clearData();
     if(displayedRoute.length > 0){
       if(displayedRoute[0].route.points){
-        this.routePoints = displayedRoute[0].route.points;        
+        this.routePoints = displayedRoute[0].route.points;
+        this.cacheRoutePoints = this.routePoints;    
       }
       if(displayedRoute[0].trace.points){
-        this.tracePoints = displayedRoute[0].trace.points;        
+        this.tracePoints = displayedRoute[0].trace.points;  
+        this.cacheTracePoints = this.tracePoints;      
       }
       this.fitBounds();
     }
@@ -122,6 +130,29 @@ export class MapComponent implements OnInit {
     this.traceBounds = undefined;
     this.routePoints = undefined;
     this.tracePoints = undefined;
+    this.cacheRoutePoints = undefined;
+    this.cacheTracePoints = undefined;
   }
 
+  private showOrHideTrace(){
+    if(this.traceSelected === 'selected'){
+      this.traceSelected = '';
+      this.tracePoints = undefined;
+    }
+    else{
+      this.traceSelected = 'selected';
+      this.tracePoints = this.cacheTracePoints;
+    }
+  }
+
+  private showOrHideRoute(){
+    if(this.routeSelected === 'selected'){
+      this.routeSelected = '';
+      this.routePoints = undefined;
+    }
+    else{
+      this.routeSelected = 'selected';
+      this.routePoints = this.cacheRoutePoints;
+    }
+  }
 }

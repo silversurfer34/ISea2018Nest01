@@ -1,4 +1,7 @@
-<div class="example-container mat-elevation-z8">
+<div class="bandeau">
+  <button mat-raised-button color="primary" class="buttonAdd" (click)="openUploadDialog()">Add one</button>
+</div>
+<div>
 <mat-table #table [dataSource]="dataSource" matSort>
 
     <!-- route exist -->

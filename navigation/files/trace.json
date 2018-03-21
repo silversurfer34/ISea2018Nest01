@@ -1,26 +1,204 @@
 {
     "TraceName": "",
-    "Points": [
+    "Points": 
 {
-        "time": 1521640364.782396,
-        "latitude": 43.552598,
-        "longitude": 3.963942,
+        "time": 0,
+        "bearing": 0,
+        "longitude": 0,
+        "latitude": 0,
+        "speed": 0,
+{
+        "time": "1980-01-06T01:11:07",
         "bearing": 0.0,
-        "speed": 2
-},
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
 {
-        "time": 1521640365.7927825,
-        "latitude": 43.552607355430254,
-        "longitude": 3.963942,
-        "bearing": 22.5,
-        "speed": 2
-},
+        "time": "1980-01-06T01:11:08",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
 {
-        "time": 1521640366.7990868,
-        "latitude": 43.552615963799816,
-        "longitude": 3.963945565703424,
-        "bearing": 45.0,
-        "speed": 2
+        "time": "1980-01-06T01:11:09",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:10",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:11",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:12",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:13",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:14",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:15",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:16",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:17",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:18",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:19",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:20",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:21",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:22",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:23",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:24",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:25",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:26",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:27",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:28",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:29",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:30",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:31",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:32",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:33",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:34",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:35",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:36",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:37",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0,
+{
+        "time": "1980-01-06T01:11:38",
+        "bearing": 0.0,
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "speed": 0.0
 }
     ]
 }

@@ -38,5 +38,12 @@ export class HomeComponent implements OnInit {
     else
       return imgSrc
   }
+
+  openUploadDialog(){
+    this.store.dispatch({
+      type: 'OPEN_UPLOAD_DIALOG',
+      payload: true
+    })
+  }
 }
 

@@ -8,19 +8,23 @@
        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
   }
-.appName{
-    margin: 0 0 0 50px;
+.appName{    
+    font-size: x-large;
+    margin: 0 0 0 16px;
+    letter-spacing: 5px;
 }
 
 .content{
     height: calc( 100% - 64px);
+    position: relative;
 }
 
-.div-button:hover{
+.div-button:hover{    
     cursor: pointer;    
 }
 
 .div-button{
+    margin-left: 32px;
     display: flex; 
-    align-items: center
+    align-items: center;
 }

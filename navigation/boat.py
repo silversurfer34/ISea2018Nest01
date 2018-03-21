@@ -1,5 +1,5 @@
 import threading
-from navigation.position import CurrentPosition
+from position import CurrentPosition
 import math
 import time
 
