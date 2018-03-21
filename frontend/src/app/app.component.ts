@@ -45,13 +45,6 @@ export class AppComponent {
     });
   }
 
-  openUploadDialog(){
-    this.store.dispatch({
-      type: 'OPEN_UPLOAD_DIALOG',
-      payload: true
-    })
-  }
-
   goHome(){
     this.router.navigateByUrl('/');
   }

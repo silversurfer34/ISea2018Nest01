@@ -10,6 +10,7 @@
   }
 .appName{
     margin: 0 0 0 50px;
+    font-size: x-large
 }
 
 .content{
@@ -22,5 +23,5 @@
 
 .div-button{
     display: flex; 
-    align-items: center
+    align-items: center;
 }
