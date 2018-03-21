@@ -3,8 +3,6 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../backend/backend.service';
 import { RouteDataFromDb, Point } from '../datamodel/datamodel';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 
 @Component({
   selector: 'app-map',
@@ -12,10 +10,13 @@ import 'rxjs/add/observable/of';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-  @ViewChild('gm') googleMaps: any;
+  
   lat: number = 51.678418;
   lng: number = 7.809007;
-  
+  private globalBounds;
+  private routeBounds;
+  private traceBounds;
+
   private routeColor = "#99cc00";
   private traceColor = "#cc9900";
   private routePoints: Point[];
@@ -38,9 +39,10 @@ export class MapComponent implements OnInit {
         this.store.dispatch({
           type: "SET_SNACKBAR_MESSAGE",
           payload: 'Missing route information'
-        });        
+        });                
         // this.router.navigateByUrl('/home');
       }
+      this.clearData();
     })
     .subscribe();
 
@@ -55,14 +57,71 @@ export class MapComponent implements OnInit {
   }
 
   private handleDisplayedRoute( displayedRoute: RouteDataFromDb[] ){
+    this.clearData();
     if(displayedRoute.length > 0){
       if(displayedRoute[0].route.points){
-        this.routePoints = displayedRoute[0].route.points;
+        this.routePoints = displayedRoute[0].route.points;        
       }
       if(displayedRoute[0].trace.points){
-        this.tracePoints = displayedRoute[0].trace.points;
+        this.tracePoints = displayedRoute[0].trace.points;        
+      }
+      this.fitBounds();
+    }
+  }
+
+  private fitBounds(){    
+    this.routeBounds = this.getBoundsForPolygon(this.routePoints);
+    this.traceBounds = this.getBoundsForPolygon(this.tracePoints);
+
+    if(this.routeBounds && !this.traceBounds){
+      this.globalBounds = this.routeBounds;
+    }
+    else if(!this.routeBounds && this.traceBounds){
+      this.globalBounds = this.traceBounds;
+    }
+    else if(this.routeBounds && this.traceBounds){
+      this.globalBounds = {
+        east: this.routeBounds.east > this.traceBounds.east? this.routeBounds.east : this.traceBounds.east,
+        west: this.routeBounds.west < this.traceBounds.west? this.routeBounds.west : this.traceBounds.west,
+        north: this.routeBounds.north > this.traceBounds.north? this.routeBounds.north : this.traceBounds.north,
+        south: this.routeBounds.south < this.traceBounds.south? this.routeBounds.south : this.traceBounds.south
       }
     }
+  }
+
+  getBoundsForPolygon( points: Point[] ){
+    let bounds = undefined;
+    if(points){
+      const minLatitude = points.reduce( (previous, current) => {
+        return previous.latitude < current.latitude ? previous: current;
+      }, {latitude: undefined, longitude: undefined});
+  
+      const maxLatitude = points.reduce( (previous, current) => {
+        return previous.latitude > current.latitude ? previous: current;
+      });
+      const minLongitude = points.reduce( (previous, current) => {
+        return previous.longitude < current.longitude ? previous: current;
+      });
+      const maxLongitude = points.reduce( (previous, current) => {
+        return previous.longitude > current.longitude ? previous: current;
+      });
+
+      bounds = {
+        east: maxLongitude.longitude,
+        west: minLongitude.longitude,
+        north: maxLatitude.latitude,
+        south: minLatitude.latitude
+      }
+    }
+    return bounds;
+  }
+
+  private clearData(){
+    this.globalBounds = undefined;
+    this.routeBounds = undefined;
+    this.traceBounds = undefined;
+    this.routePoints = undefined;
+    this.tracePoints = undefined;
   }
 
 }
