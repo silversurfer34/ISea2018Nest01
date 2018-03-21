@@ -1,5 +1,5 @@
 import navigation.route as Routing
-import navigation.gpsreaderthread as Gps
+import navigation.trace as Gps
 import navigation.boatcontroller as Controller
 from navigation.boat import Boat
 import io
