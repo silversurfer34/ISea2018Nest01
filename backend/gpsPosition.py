@@ -41,7 +41,7 @@ class GPSPosition:
                 self.latitude = gp.latitude
                 self.speed = gp.spd_over_grnd
                 self.direction = gp.true_course
-                self.datetime = gp.datetime
+                self.datetime = gp.datetime.isoformat()
                 #print (self.datetime.isoformat(), self.longitude, self.latitude, self.speed, self.direction)
 
     def run(self):
