@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>RouteTest01</name>
+    <Style id="line-FF5252-5844-nodesc-normal">
+      <LineStyle>
+        <color>ff5252ff</color>
+        <width>5.844</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-FF5252-5844-nodesc-highlight">
+      <LineStyle>
+        <color>ff5252ff</color>
+        <width>8.766</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-FF5252-5844-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-FF5252-5844-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-FF5252-5844-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>WayPoints</name>
+      <styleUrl>#line-FF5252-5844-nodesc</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          3.9085418,43.6164385,0
+          3.9087832,43.6162249,0
+          3.9092821,43.616489,0
+          3.9090729,43.6169861,0
+          3.908177,43.6167841,0
+          3.9085096,43.6164579,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>

@@ -1,0 +1,26 @@
+{
+    "TraceName": "",
+    "Points": [
+{
+        "time": 1521640364.782396,
+        "latitude": 43.552598,
+        "longitude": 3.963942,
+        "bearing": 0.0,
+        "speed": 2
+},
+{
+        "time": 1521640365.7927825,
+        "latitude": 43.552607355430254,
+        "longitude": 3.963942,
+        "bearing": 22.5,
+        "speed": 2
+},
+{
+        "time": 1521640366.7990868,
+        "latitude": 43.552615963799816,
+        "longitude": 3.963945565703424,
+        "bearing": 45.0,
+        "speed": 2
+}
+    ]
+}
