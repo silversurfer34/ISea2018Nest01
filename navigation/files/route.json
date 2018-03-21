@@ -2,20 +2,28 @@
     "TraceName": "Pérols pond",
     "Points": [
 		{
-			"latitude": 43.552598,
-			"longitude": 3.963942
+			"latitude": 43.6164385,
+			"longitude": 3.9085418
 		},
 		{
-			"latitude": 43.552412,
-			"longitude": 3.964282
+			"latitude": 43.6162249,
+			"longitude": 3.9087832
 		},
 		{
-			"latitude": 43.552347,
-			"longitude": 3.963790
+			"latitude": 43.616489,
+			"longitude": 3.9092821
 		},
 		{
-			"latitude": 43.552598,
-			"longitude": 3.963942
+			"latitude": 43.6169861,
+			"longitude": 3.9090729
+		},
+		{
+			"latitude": 43.6167841,
+			"longitude": 3.908177
+		},
+		{
+			"latitude": 43.6164579,
+			"longitude": 3.9085096
 		}
     ]
 }
