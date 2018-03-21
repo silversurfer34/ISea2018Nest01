@@ -37,13 +37,12 @@ class TraceThread ( threading.Thread ):
                   file.write('\n')
                   isFirstElement = False
 
-              CurrentPosition.lock.acquire()
-              point["time"] = CurrentPosition.time
-              point["latitude"] = CurrentPosition.latitude
-              point["longitude"] = CurrentPosition.longitude
-              point["bearing"] = CurrentPosition.bearing
-              point["speed"] = CurrentPosition.speed
-              CurrentPosition.lock.release()
+              position = CurrentPosition.getCurrentPosition()
+              point["time"] = position.time
+              point["latitude"] = position.latitude
+              point["longitude"] = position.longitude
+              point["bearing"] = position.bearing
+              point["speed"] = position.speed
 
               file.write(json.dumps(point, indent=8))
               file.write('\n    ]\n}')
