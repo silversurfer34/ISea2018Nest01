@@ -1,4 +1,9 @@
-<agm-map [latitude]="lat" [longitude]="lng" #gm>
+<agm-map 
+  [latitude]="lat" 
+  [longitude]="lng" 
+  [fitBounds]="globalBounds"
+  #gm
+>
   <agm-polyline [strokeColor]="routeColor">
     <agm-polyline-point *ngFor="let point of routePoints" [latitude]="point.latitude" [longitude]="point.longitude"></agm-polyline-point>
   </agm-polyline>>
