@@ -3,8 +3,8 @@ import RPi.GPIO as GPIO
 import time
 
 
-MotorPin_A         = 16
-MotorPin_B         = 18
+MotorPin_A         = 36
+MotorPin_B         = 38
 
 g_sta =  1
 g_dir =  1

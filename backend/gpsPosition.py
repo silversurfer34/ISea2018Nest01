@@ -4,6 +4,7 @@
 # Test du port série
 import serial
 import threading
+import datetime
 from pynmea2 import nmea
 
 MEAS_1_s=b"$PMTK300,1000,0,0,0,0*1C\r\n"
@@ -14,49 +15,46 @@ class GPSPosition:
     latitude = 0
     speed = None
     direction = None
-    timestamp = 0
+    datetime = None
     num_sats = None
     horizontal_dil = None
-    
-
        
-def refresh(aGPSPosition, serialPort):
-    while True:
-        data =serialPort.readline()
-        data = data.decode('ascii', errors='ignore')
-        start = data.find("$GP")
-        if start < 0:
-            continue
-        data = data[start:]
-        gp = nmea.NMEASentence.parse(data)
-        if 'GGA' == gp.sentence_type:
-            print (gp.sentence_type)
-            print (gp.timestamp)
-            aGPSPosition.num_sats = gp.num_sats
-            aGPSPosition.horizontal_dil = gp.horizontal_dil
-            print (aGPSPosition.num_sats)
-            print (aGPSPosition.horizontal_dil)
-        elif 'RMC' == gp.sentence_type:
-            print (gp.sentence_type)
-            aGPSPosition.timestamp = gp.timestamp
-            aGPSPosition.longitude = gp.longitude
-            aGPSPosition.latitude = gp.latitude
-            aGPSPosition.speed = gp.spd_over_grnd
-            aGPSPosition.direction = gp.true_course
-            print (aGPSPosition.timestamp)
-            print (aGPSPosition.longitude)
-            print (aGPSPosition.latitude)
-            print (aGPSPosition.speed)
-            print (aGPSPosition.direction)
+    def refresh(self, serialPort):
+        print ("refresh")
+        while True:
+            data =serialPort.readline()
+            data = data.decode('ascii', errors='ignore')
+            start = data.find("$GP")
+            if start < 0:
+                continue
+            data = data[start:]
+            gp = nmea.NMEASentence.parse(data)
+            if 'GGA' == gp.sentence_type:
+                #print (gp.sentence_type)
+                #print (gp.timestamp)
+                self.num_sats = gp.num_sats
+                self.horizontal_dil = gp.horizontal_dil
+                #print (self.num_sats, self.horizontal_dil)
+            elif 'RMC' == gp.sentence_type:
+                #print (gp.sentence_type)
+                self.longitude = gp.longitude
+                self.latitude = gp.latitude
+                self.speed = gp.spd_over_grnd
+                self.direction = gp.true_course
+                self.datetime = gp.datetime.isoformat()
+                #print (self.datetime.isoformat(), self.longitude, self.latitude, self.speed, self.direction)
 
-        
-port = "/dev/serial0"
-serialPort = serial.Serial(port, 38400, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE)
-serialPort.write(MEAS_1_s)
-serialPort.flushInput()
+    def run(self):
+        port = "/dev/serial0"
+        serialPort = serial.Serial(port, 38400, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE)
+        serialPort.write(MEAS_1_s)
+        serialPort.flushInput()
+        refreshThread = threading.Thread(target=GPSPosition.refresh, args=(self, serialPort))
+        refreshThread.start()        
     
-lastPosition = GPSPosition()
 
-refreshThread = threading.Thread(target=refresh, args=(lastPosition, serialPort))
-refreshThread.start()
+#aGPS = GPSPosition()
+#aGPS.run()
+        
+
 

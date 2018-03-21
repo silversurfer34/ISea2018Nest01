@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
-import { RouteInfoFromDb, RouteDataFromDb, RouteData } from '../datamodel/datamodel';
+import { RouteInfoFromDb, RouteDataFromDb, RouteData, FileInfo } from '../datamodel/datamodel';
 import { Store } from '@ngrx/store';
 
 @Injectable()
@@ -30,30 +30,21 @@ export class BackendService {
         type: 'ADD_ROUTE_DATA',
         payload: result
       })      
-  })).catch(err => console.log(err));    
+    })).catch(err => console.log(err));    
   }
 
-  addRoute(name: string, plannedDate: string, plannedFile: File, doneDate: string, doneFile: File){
+  addRoute(name: string, routeDate: string, routeFile: File, traceDate: string, traceFile: File){
     const timestamp = +new Date();
-    let plannedFileName = '';
-    let doneFileName = '';
 
-    let filesToSave=[];
-    if( plannedFile ) {
-      plannedFileName = timestamp.toString() + '-' + plannedFile.name;
-      filesToSave.push(plannedFile);
-    }
-    if( doneFile ) {
-      doneFileName = timestamp.toString() + '-' + doneFile.name;
-      filesToSave.push(doneFile);
-    }
+    let filesInfo: FileInfo[] = [ 
+      {name: routeFile? timestamp.toString() + '-' + routeFile.name : '', date: routeDate || new Date().toString(), file: routeFile},
+      {name: traceFile? timestamp.toString() + '-' + traceFile.name: '', date: traceDate || new Date().toString(), file: traceFile}
+    ]   
     
-    if(filesToSave.length > 0){
-      this.saveRouteInfo(name, plannedDate, plannedFileName, doneDate, doneFileName, timestamp);
-
-      this.loadAndSaveRouteData(filesToSave, timestamp);
-      
-      this.saveFile(filesToSave, [plannedFileName, doneFileName], timestamp);
+    if(routeFile || traceFile){
+      this.loadAndSaveRouteData(filesInfo, timestamp);
+      this.saveRouteInfo(name, filesInfo, timestamp);      
+      this.saveFile(filesInfo, timestamp);
     }
     else{
       this.store.dispatch({
@@ -63,26 +54,26 @@ export class BackendService {
     }
   }  
 
-  saveRouteInfo(name: string, plannedDate: string, plannedFileName: string, doneDate: string, doneFileName: string, timestamp: number){    
+  saveRouteInfo(name: string, filesInfo: FileInfo[], timestamp: number){    
     this.db.collection<RouteInfoFromDb>(this.routesInfoDb).add({
       id: timestamp,
       name: name,
-      plannedDate: plannedDate,
-      plannedFileName: plannedFileName,
-      doneDate: doneDate,
-      doneFileName: doneFileName
+      routeDate: filesInfo[0].date,
+      routeFileName: filesInfo[0].name,
+      traceDate: filesInfo[1].date,
+      traceFileName: filesInfo[1].name
     }).catch( err => console.log(err));
   }
 
-  loadAndSaveRouteData(files: File[], timestamp: number){
+  loadAndSaveRouteData(info: FileInfo[], timestamp: number){
     var reader = new FileReader(); 
     let me = this;    
     function readFile(index, content) {      
-      if( index >= files.length){        
+      if( index >= info.length){     
         const routeDataToSave: RouteDataFromDb = {
           id: timestamp,
-          plannedRoute: content[0] || {},
-          doneRoute: content[1] || {}
+          route: content[0],
+          trace: content[1]
         }
         me.db.collection<RouteDataFromDb>(me.routesDataDb).add(
           routeDataToSave
@@ -96,21 +87,28 @@ export class BackendService {
         return;        
       }
 
-      var file = files[index];
-      reader.onload = function(e) {         
-        content.push(JSON.parse(reader.result));
+      var file = info[index].file;
+      reader.onload = function(e) {        
+        content[index] = JSON.parse(reader.result);
         readFile(index+1, content);        
       }
-      reader.readAsText(file);      
+      if(file){
+        reader.readAsText(file);
+      }
+      else{
+        readFile(index + 1, content);
+      }
       return content;
     }    
-    readFile(0, []); 
+    readFile(0, [{}, {}]); 
   }
 
-  saveFile(filesToSave: File[], fileNames: string[], timestamp: number){
-    filesToSave.forEach( ( file, index) => {
-      this.storage.upload(fileNames[index], file )
-      .catch( error => console.log("error"));
+  saveFile(filesInfo: FileInfo[], timestamp: number){
+    filesInfo.forEach( fileInfo => {      
+      if(fileInfo.file){        
+        this.storage.upload(fileInfo.name, fileInfo.file )
+        .catch( error => console.log("error"));
+      }
     });
   }
 }

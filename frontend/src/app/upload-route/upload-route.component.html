@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Add a new route</h1>
+<div mat-dialog-content class="form-content">
+  <mat-form-field>
+      <input matInput placeholder="Route name" value="" [formControl]="routeName" type="text" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="routeDatePicker" placeholder="Route date" [formControl]="routeDate">
+    <mat-datepicker-toggle matSuffix [for]="routeDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #routeDatePicker></mat-datepicker>
+  </mat-form-field>
+  
+  <div class="inputFile">
+    <button mat-raised-button *ngIf="!routeFile" color="primary" type="button" (click)="openRouteFileSelection()">
+        Add a route file... <input #routeFileSelection type="file" accept=".json" style="display: none;" (change)="onRouteFileSelection($event.currentTarget.files)">
+    </button>
+    <mat-chip-list *ngIf="routeFile">
+    <mat-chip [selectable]="false" [selected]="true" [removable]="true" (remove)="routeFile=undefined">
+        {{routeFile.name}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+ </div>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="traceDatePicker" placeholder="Trace date" [formControl]="traceDate">
+    <mat-datepicker-toggle matSuffix [for]="traceDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #traceDatePicker></mat-datepicker>
+  </mat-form-field>
+  
+  <div class="inputFile">
+    <button mat-raised-button *ngIf="!traceFile" color="primary" type="button" (click)="openTraceFileSelection()">
+        Add a trace file... <input #traceFileSelection type="file" accept=".json" style="display: none;" (change)="onTraceFileSelection($event.currentTarget.files)">
+    </button>
+    <mat-chip-list *ngIf="traceFile">
+    <mat-chip [selectable]="false" [selected]="true" [removable]="true" (remove)="traceFile=undefined">
+        {{traceFile.name}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+</div>
+<div mat-dialog-actions class="form-footer">
+  <button mat-raised-button type="button" (click)="close()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="apply()" [disabled]="isFormInvalid()">Create</button> 
+</div>

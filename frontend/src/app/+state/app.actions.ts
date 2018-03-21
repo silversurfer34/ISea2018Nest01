@@ -14,7 +14,13 @@ export interface ClearSnackbarMessage {
   type: 'CLEAR_SNACKBAR_MESSAGE';
 }
 
+export interface OpenUploadDialog {
+  type: 'OPEN_UPLOAD_DIALOG';
+  payload: boolean;
+}
+
 export type AppAction = 
 AddRouteData 
 | SetSnackbarMessage
-| ClearSnackbarMessage;
+| ClearSnackbarMessage
+| OpenUploadDialog;

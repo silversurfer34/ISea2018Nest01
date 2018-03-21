@@ -1,7 +1,13 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
   <mat-toolbar-row>
-    <i class="material-icons">directions_boat</i>
-    <span>iSea</span>
+    <div class="div-button" (click)="goHome()">
+      <img src="../assets/captegg.png" height="54" width="54"> 
+      <span class="appName">iSea</span>
+    </div>
+    <span class="example-fill-remaining-space"></span>
+    <button mat-raised-button color="primary" (click)="openUploadDialog()">Add one</button>
 </mat-toolbar-row>
 </mat-toolbar>
+<div class="content">
 <router-outlet></router-outlet>
+</div>

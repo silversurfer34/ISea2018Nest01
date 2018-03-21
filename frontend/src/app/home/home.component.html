@@ -1,16 +1,36 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav [mode]="over">
-    <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p>
-    <p>
-      menu
-    </p>
-  </mat-sidenav>
+<div class="example-container mat-elevation-z8">
+<mat-table #table [dataSource]="dataSource" matSort>
 
-  <mat-sidenav-content>
-    <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p>
+    <!-- route exist -->
+    <ng-container matColumnDef="route">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Route</mat-header-cell>
+      <mat-cell *matCellDef="let element">  <img [src]="onDisplayIcon(element.routeFileName, '../assets/checkmark-16.png')"></mat-cell>
+    </ng-container>
 
-      <input type="file" accept=".json" (change)="onFileSelection($event.currentTarget.files);">
+    <!-- trace done -->
+    <ng-container matColumnDef="trace">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Trace</mat-header-cell>
+      <mat-cell *matCellDef="let element"> <img [src]="onDisplayIcon(element.traceFileName, '../assets/checkmark-16.png')"> </mat-cell>
+    </ng-container>
 
+    <!-- route name -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Route name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
 
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    <!-- trace date -->
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Trace date</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.traceDate | date : 'MM/dd/yyyy @ h:mma'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="launchMapView">
+        <mat-header-cell *matHeaderCellDef mat-sort-header ></mat-header-cell>
+        <mat-cell *matCellDef="let element"><a routerLink="/map/{{element.id}}"> <img src="../assets/seaMap.png" class="iconRoute" height="32" width="32"></a> </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
+  </mat-table>
+</div>
