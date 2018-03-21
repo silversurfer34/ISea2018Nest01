@@ -14,11 +14,11 @@ MEAS_5_s=b"$PMTK300,5000,0,0,0,0*18\r\n"
 class GPSPosition:
     longitude = 0
     latitude = 0
-    speed = None
-    direction = None
-    datetime = None
-    num_sats = None
-    horizontal_dil = None
+    speed = 0
+    direction = 0
+    datetime = 0
+    num_sats = 0
+    horizontal_dil = 0
        
     def refresh(self, serialPort):
         print ("refresh")
@@ -45,7 +45,7 @@ class GPSPosition:
                     self.direction = gp.true_course
                     self.datetime = gp.datetime
                     self.datetime = self.datetime.isoformat()
-                    print (self.datetime, self.longitude, self.latitude, self.speed, self.direction)
+                    #print (self.datetime, self.longitude, self.latitude, self.speed, self.direction)
             except:
                 pass
             #    print ("wait for data")
@@ -62,8 +62,8 @@ class GPSPosition:
         refreshThread.start()        
     
 
-aGPS = GPSPosition()
-aGPS.run()
+#aGPS = GPSPosition()
+#aGPS.run()
         
 
 

@@ -1,9 +1,9 @@
-import navigation.route as Routing
-import navigation.trace as Gps
-import navigation.boatcontroller as Controller
-from navigation.boat import Boat
+import route as Routing
+import trace as Gps
+import boatcontroller as Controller
+from boat import Boat
 import io
-import navigation.kmlexport as Kml
+import kmlexport as Kml
 import os
 
 def main():

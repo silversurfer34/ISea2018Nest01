@@ -1,9 +1,9 @@
 import threading
 import time
-from navigation.route import Route
-from navigation.bearingcalculator import BearingCalculator
-from navigation.position import CurrentPosition
-from navigation.boat import Boat
+from route import Route
+from bearingcalculator import BearingCalculator
+from position import CurrentPosition
+from boat import Boat
 
 
 class Steering ( threading.Thread ):

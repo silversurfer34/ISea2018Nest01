@@ -1,6 +1,9 @@
 from threading import Lock
 
-import ../backend/gpsPosition as GPS
+import sys
+sys.path.insert(0, '/home/pi/gitRepo/ISea2018Nest01/backend')
+
+import gpsPosition as GPS
 
 class Position:
     #def __init__(self, time, latitude, longitude, speed, bearing):
@@ -25,7 +28,7 @@ class CurrentPosition:
     bearing = 0
     lock = Lock()
     
-    aGPS = GPS()
+    aGPS = GPS.GPSPosition()
     aGPS.run()
     
 
@@ -33,7 +36,7 @@ class CurrentPosition:
     def getCurrentPosition():
         CurrentPosition.lock.acquire()
         #position = Position(CurrentPosition.time, CurrentPosition.latitude, CurrentPosition.longitude, CurrentPosition.speed, CurrentPosition.bearing)
-        position = Position(aGPS)
+        position = Position(CurrentPosition.aGPS)
         CurrentPosition.lock.release()
         return position
 

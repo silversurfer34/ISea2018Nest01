@@ -1,6 +1,6 @@
 import threading
 import time
-from navigation.position import CurrentPosition
+from position import CurrentPosition
 import json
 import random
 import os

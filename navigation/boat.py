@@ -1,9 +1,9 @@
 import threading
-from navigation.position import CurrentPosition
+from position import CurrentPosition
 import math
 import time
 
-class Boat ( threading.Thread, simulation ):
+class Boat ( threading.Thread ):
    def __init__ ( self ):
        self.helmAngle = 0
        CurrentPosition.lock.acquire()
@@ -13,7 +13,7 @@ class Boat ( threading.Thread, simulation ):
        CurrentPosition.time = time.time()
        CurrentPosition.speed = 2
        CurrentPosition.lock.release()
-        threading.Thread.__init__ ( self )
+       threading.Thread.__init__ ( self )
 
    def setHelmAngle(self, angle):
        self.helmAngle = angle
