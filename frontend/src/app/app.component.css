@@ -11,3 +11,16 @@
 .appName{
     margin: 0 0 0 50px;
 }
+
+.content{
+    height: calc( 100% - 64px);
+}
+
+.div-button:hover{
+    cursor: pointer;    
+}
+
+.div-button{
+    display: flex; 
+    align-items: center
+}

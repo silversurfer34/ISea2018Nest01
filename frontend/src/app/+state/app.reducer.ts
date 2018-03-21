@@ -6,8 +6,10 @@ export function AppReducer(state: App, action: AppAction): App {
 
   switch (action.type) {
     case 'ADD_ROUTE_DATA': {      
-      state.displayedRoute.push(action.payload);      
-      return state;
+      return{
+        ...state,
+        displayedRoute: [action.payload]
+      }
     }
 
     case 'SET_SNACKBAR_MESSAGE': {

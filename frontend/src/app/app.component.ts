@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/observable';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { UploadRouteComponent } from './upload-route/upload-route.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
   constructor(
     private store: Store<any>,
     private snackbar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ){
     this.store.select('app', 'message').map( msg => {
       if(msg){
@@ -48,5 +50,9 @@ export class AppComponent {
       type: 'OPEN_UPLOAD_DIALOG',
       payload: true
     })
+  }
+
+  goHome(){
+    this.router.navigateByUrl('/');
   }
 }

@@ -20,6 +20,7 @@ import { AppInitialState } from './+state/app.init';
 import { UploadRouteComponent } from './upload-route/upload-route.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from './map/map.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,10 @@ import { MapComponent } from './map/map.component';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAmOplawyoQFVDrLOlqeuKBC2jOvE93y4w'
+    })
   ],
   providers: [BackendService],
   entryComponents: [UploadRouteComponent],
