@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Demi bassin</name>
+    <Style id="line-0288D1-3519-nodesc-normal">
+      <LineStyle>
+        <color>ffd18802</color>
+        <width>3.519</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-0288D1-3519-nodesc-highlight">
+      <LineStyle>
+        <color>ffd18802</color>
+        <width>5.2785</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-0288D1-3519-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-0288D1-3519-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-0288D1-3519-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>Demi bassin complexe</name>
+      <styleUrl>#line-0288D1-3519-nodesc</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          3.8996395,43.5993342,0
+          3.9000124,43.5990564,0
+          3.900176,43.5991361,0
+          3.8996181,43.5998081,0
+          3.8997576,43.5998392,0
+          3.9002377,43.5991652,0
+          3.9003879,43.5992254,0
+          3.9000513,43.5995158,0
+          3.8999078,43.5998412,0
+          3.8995993,43.5997188,0
+          3.8996154,43.5993769,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>
