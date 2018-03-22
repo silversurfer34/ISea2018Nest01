@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import pigpio
 import time
-import atexit
 
 class MotorPI:
     def __init__(self, pin):
@@ -11,10 +10,9 @@ class MotorPI:
         self.maxForward = 2500
         self.neutral = (self.maxReverse + self.maxForward)/2
         self.minPulse = self.neutral + (self.maxForward - self.neutral) * 0.2
-        self.maxPulse = self.maxForward - (self.maxForward - self.neutral) * 0.5
+        self.maxPulse = self.maxForward - (self.maxForward - self.neutral) * 0.7
         print("neutral {} minPulse {} maxPulse {}".format(self.neutral, self.minPulse, self.maxPulse) )
         self.previousSpeed = 0
-        atexit.register(self.cleanUp) 
 
     def calibrate(self):
         print("calibrate")
@@ -41,10 +39,12 @@ class MotorPI:
         self.__increaseSpeed(speed)
 
     def stop(self):
-        self.pi.set_servo_pulsewidth(self.pin, self.minPulse)
+        self.pi.set_servo_pulsewidth(self.pin, self.neutral)
         self.previousSpeed = 0
 
+    
     def cleanUp(self):
+        print("clenup")
         self.pi.set_servo_pulsewidth(self.pin, 0)
         self.previousSpeed = 0
 

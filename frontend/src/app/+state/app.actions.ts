@@ -36,7 +36,7 @@ export interface UpdateRoutes {
 
 export interface Loading{
   type: 'LOADING',
-  payload: false;
+  payload: boolean;
 }
 
 export interface LoadRouteDataFromDb{

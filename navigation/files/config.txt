@@ -1,8 +1,8 @@
 {
-    "waypointprecision": 2,
+    "waypointprecision": 4,
     "helmgain": 0.5,
     "helmmax": 45,
-    "helmtrim": 0,
-    "motorspeed": 100,
+    "helmtrim": -4,
+    "motorspeed": 40,
     "controlfrequency": 1
 }
