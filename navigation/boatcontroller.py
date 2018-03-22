@@ -8,14 +8,12 @@ from boat import Boat
 
 class Steering ( threading.Thread ):
 
-    def __init__ ( self, route, boat ):
+    def __init__ ( self, route):
         threading.Thread.__init__ ( self )
         self.route = route
-        self.boat = boat
 
     def run ( self ):
         print(self.route)
-        print('Going towards waypoint: lat=' + str(self.route.nextWaypoint().latitude) + ',long=' + str(self.route.nextWaypoint().longitude))
         while not self.route.finished():
             position = CurrentPosition.getCurrentPosition()
             bearing, distance = BearingCalculator.requiredChangeOfDirection(position, self.route.nextWaypoint())
@@ -37,9 +35,10 @@ class Steering ( threading.Thread ):
                 angle = -45
             else:
                 angle = bearingDif
-            self.boat.setHelmAngle(angle)
 
-            if distance < 2:
+            self.boat.setHelmAngle(-angle) # set bar in opposite direction
+
+            if distance < 3:
                 self.route.passWaypoint()
                 print('Passed waypoint')
                 print(self.route)
