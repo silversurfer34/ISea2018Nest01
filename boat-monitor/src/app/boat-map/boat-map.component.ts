@@ -17,30 +17,23 @@ export class BoatMapComponent implements OnInit {
   lng: number = 3.963800;
   current_zoom: number = 18;
   positions: any[];
-  current_marker_lat: number = null;
-  current_marker_lng: number = null;
-  dest_marker_lat: number = null;
-  dest_marker_lng: number = null;
-
-  destChosen = false;
+  markers: any[];
 
   constructor(private positionService: PositionService) { }
 
   ngOnInit() {
     this.positions = [];
-    this.current_marker_lat = this.lat;
-    this.current_marker_lng = this.lng;
-
+    this.markers = [];
     this.positionService.getPositions().subscribe((positions: Position[]) => {
       this.updatePositions(positions);
     });
   }
 
   onChoseLocation(event) {
-    // console.log(event);
-    this.dest_marker_lat = event.coords.lat;
-    this.dest_marker_lng = event.coords.lng;
-    this.destChosen = true;
+    var marker = new Position();
+    marker.latitude = event.coords.lat;
+    marker.longitude = event.coords.lng;
+    this.markers.push(marker);
   }
 
   updatePositions(positions) {
