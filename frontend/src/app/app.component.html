@@ -9,3 +9,5 @@
 </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
+
+<app-progress-bar *ngIf="loading$ | async"></app-progress-bar>

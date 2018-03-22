@@ -57,7 +57,7 @@ class GPSPosition:
             #    time.sleep(1)
                 
                 
-    def run(self):
+    def __init__(self):
         port = "/dev/serial0"
         #time.sleep(15)
         serialPort = serial.Serial(port, 38400, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE)

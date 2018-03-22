@@ -6,5 +6,6 @@ export const AppInitialState: App = {
   openUploadDialog: false,
   appSuffix: "",
   newItemId: -1,
-  routesInfoFromDb: []
+  routesInfoFromDb: [],
+  loading: false
 };

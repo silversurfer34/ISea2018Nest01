@@ -23,7 +23,10 @@ export class HomeComponent implements OnInit {
   constructor(
     private backend: BackendService,
     private store: Store<any>
-  ) { 
+  ) {
+    this.store.dispatch({
+      type: 'LOAD_ROUTE_DATA_FROM_DB'
+    })
     this.backend.getExistingRoutes();//.subscribe( changed => this.fillDataSource(changed));
     this.store.select('app', 'newItemId').subscribe( newItemId => this.newItemId = newItemId);
     this.store.select('app', 'routesInfoFromDb').subscribe( routes => this.fillDataSource(routes));
@@ -74,6 +77,16 @@ export class HomeComponent implements OnInit {
       suffix=" newItemAdded"
     }
     return 'mat-row' + suffix;
+  }
+
+  getTraceDate(element: RouteInfoFromDb){
+    let date = " - ";
+    if(element.traceFileName){
+      let d = new Date(element.traceDate);
+      let locale = "en-us";
+      date = d.toLocaleString(locale, { day: "2-digit", month: "long", year: "numeric" });
+    }
+    return date;
   }
 }
 
