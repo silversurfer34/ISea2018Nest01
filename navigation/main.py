@@ -10,6 +10,7 @@ import io
 import kmlexport as Kml
 import os
 import modules.motorpi as Motor
+import datetime
 
 def main():
     try:
@@ -22,14 +23,18 @@ def main():
         route = Routing.Route()
         route.initFromFile(os.path.join(fileDir,'files/route.json'))
 
-        #boat = Boat()
-        #boat.start()
         servopi = ServoPI(pd.ServoPin)
-        Gps.TraceThread(os.path.join(fileDir,'files/trace.json')).start()
+
+        tracefilename = 'files/trace' + str(datetime.datetime.now().strftime("%y-%m-%d-%H-%M")) + '.json'
+        tracefilename = os.path.join(fileDir, tracefilename)
+        trace = Gps.TraceThread(tracefilename)
+        trace.start()
 
         controller = Controller.Steering(route, servopi, motor)
         controller.start()
         controller.join()
+        trace.stopped = True
+        trace.join()
 
         Kml.exportToKML(route, os.path.join(fileDir,'files/trace.json'), os.path.join(fileDir,'files/route.kml'), os.path.join(fileDir,'files/trace.kml'))
 

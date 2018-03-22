@@ -10,6 +10,7 @@ class TraceThread ( threading.Thread ):
       self.tracefile = tracefile
       open(self.tracefile, "w").close()
       threading.Thread.__init__ ( self )
+      self.stopped = False
 
    def run ( self ):
       print('Tracing to file:', self.tracefile)
@@ -21,7 +22,7 @@ class TraceThread ( threading.Thread ):
       with open(self.tracefile, 'a') as file:
           file.write(json.dumps(trace, indent=4))
 
-      while True:
+      while not self.stopped:
           point = {}
           with open(self.tracefile, 'r+') as file:
               file.seek(0, os.SEEK_END)
