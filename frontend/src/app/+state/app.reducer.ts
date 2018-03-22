@@ -39,6 +39,20 @@ export function AppReducer(state: App, action: AppAction): App {
         appSuffix: action.payload
       }
     }
+
+    case 'UPDATE_NEW_ITEM_ID': {
+      return{
+        ...state,
+        newItemId: action.payload
+      }
+    }
+
+    case 'UPDATE_ROUTES': {
+      return{
+        ...state,
+        routesInfoFromDb: action.payload
+      }
+    }
       
     default: {
       return state;

@@ -1,3 +1,30 @@
+@keyframes newItemAdded {
+  0% {
+    opacity: 0;    
+  }
+  25% {
+    opacity: .25;
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  75% {
+    opacity: .75;
+  }
+  
+  100% {
+    opacity: 1;    
+  }
+}
+
+.newItemAdded{
+  animation-name: newItemAdded;
+  animation-duration: 2s;
+  /* animation-iteration-count: 5; */
+}
+
 .mat-row:hover .iconRoute{
   display:block;
 }
@@ -35,6 +62,8 @@ border-width: 2px;
 }
 
 .bandeau{
+  position: relative;
+  top: 64px;
   height: 60px;
   display: flex;
   align-items: center;
@@ -44,4 +73,14 @@ border-width: 2px;
 .buttonAdd{
   margin-left: 20px;
   min-width: 36px;
+}
+
+.dataTable{
+  position: relative;
+  top: 60px;
+  width: 100%
+}
+
+.filterForm{
+  margin-left: 20px;
 }

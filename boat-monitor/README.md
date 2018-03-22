@@ -9,7 +9,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ## Extra dependencies
 
 This project depends on:
-* agm which can be installed as `npm install --save @agm/core`
+`npm install --save @agm/core`
+`npm install --save angular/material2-builds angular/cdk-builds`
+`npm install --save @angular/animations`
+`npm install --save @material/toolbar`
 
 ## Code scaffolding
 
