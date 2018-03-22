@@ -2,20 +2,24 @@
 import pindefinition as pd
 import modules.motorpi as motor
 import time
+import atexit
 
-myMotor = motor.MotorPI(pd.MotorPin)
 
-def main():    
-    #myMotor.calibrate()
-    myMotor.setNeutral()
+# atexit.register(lambda x: myMotor.cleanUp())
+
+def main():
+    myMotor = motor.MotorPI(pd.MotorPin)
+    try:
+        #myMotor.calibrate()
+        myMotor.setNeutral()
+         
+        myMotor.start(30)
+        time.sleep(4)
+        myMotor.stop()
+        time.sleep(5)
         
-    for speed in range(0, 101, 10):
-        print("speed {}".format(speed))
-        myMotor.start(speed)
-        time.sleep(0.1)
-
-    print("stop")
-    myMotor.stop()
+    finally:
+        myMotor.cleanUp()
     
     
 if __name__ == "__main__":
