@@ -2,10 +2,12 @@
 
 import RPi.GPIO as GPIO
 from time import sleep
+import threading
 
 
 
 class Servo:
+	lock = threading.Lock()
 	def __init__(self, pin):
 		self.pin = pin
 		#print "ServoPin : ", self.pin
@@ -15,6 +17,17 @@ class Servo:
 		self.minAngle = 25.0
 		self.maxAngle = 165.0
 		self.keepDuty = False # if true do not set back duty to 0
+
+	def f(self, txt):
+		print ("b4 lock", txt)
+		self.lock.acquire()
+		print ("f started", txt)
+		sleep(3)
+		print ("f finished", txt)
+		self.lock.release()
+	
+	def fInThread(self, msg):
+		t = threading.Thread(target=self.f, kwargs={'txt':msg}).start()
 		
 
 	def setAngle(self, angle):

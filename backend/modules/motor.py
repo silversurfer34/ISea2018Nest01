@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
+import threading
 import time
 
 class Motor:
+	lock = threading.Lock()
 	def __init__(self, pinA, pinB):
 		self.pinA = pinA
 		self.pinB = pinB
@@ -15,7 +17,17 @@ class Motor:
 	def motorStop(self):
 		GPIO.output(self.pinA, GPIO.HIGH)
 		GPIO.output(self.pinB, GPIO.LOW)
-
+	
+	def threadFn(self, speed):
+		print("thread fn", speed)
+		self.lock.acquire()
+		self.start(speed)
+		self.lock.release()
+		
+	def startInThread(self, speed):
+		threading.Thread(target=self.threadFn, kwargs={'speed':speed}).start()
+		
+		
 	def start(self, speed):
 		### Speed between -100 and 100 negqtive vqlues for reverse
 		toSpeed = speed
@@ -36,6 +48,7 @@ class Motor:
 			time.sleep(0.01)
 
 	def __motorInternal(self, speed):
+		print(speed)
 		### speed from 0 to 100%
 		if speed > 0:
 			GPIO.output(self.pinA, GPIO.HIGH)
