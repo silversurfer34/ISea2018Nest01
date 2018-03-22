@@ -49,6 +49,8 @@ class Steering ( threading.Thread ):
             if (self.route.previousWaypoint()):
                 lat, long, bearing2, distance2 = BearingCalculator.rerouteToNearestPoint(position, self.route.previousWaypoint(), self.route.nextWaypoint(), 3)
             print("distance = " + str(distance) + "; bearing = " + str(bearing) + "; bearing2 = " + str(bearing2))
+            CurrentPosition.distancetonextwaypoint = distance
+            CurrentPosition.bearingtonextwaypoint = bearing
             if (self.route.previousWaypoint()):
                 bearing = bearing2
             bearingDif = bearing - position.bearing

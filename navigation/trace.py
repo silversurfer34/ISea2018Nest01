@@ -43,6 +43,8 @@ class TraceThread ( threading.Thread ):
               point["longitude"] = position.longitude
               point["bearing"] = position.bearing
               point["speed"] = position.speed
+              point["distancetonextwaypoint"] = CurrentPosition.distancetonextwaypoint
+              point["bearingtonextwaypoint"] = CurrentPosition.bearingtonextwaypoint
 
               file.write(json.dumps(point, indent=8))
               file.write('\n    ]\n}')

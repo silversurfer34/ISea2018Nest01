@@ -13,6 +13,8 @@ class Position:
         self.longitude = aGPS.longitude
         self.speed = aGPS.speed
         self.bearing = aGPS.direction
+        self.distancetonextwaypoint = 0
+        self.bearingtonextwaypoint = 0
 
 class CurrentPosition:
     time = 0
