@@ -78,5 +78,15 @@ export class HomeComponent implements OnInit {
     }
     return 'mat-row' + suffix;
   }
+
+  getTraceDate(element: RouteInfoFromDb){
+    let date = " - ";
+    if(element.traceFileName){
+      let d = new Date(element.traceDate);
+      let locale = "en-us";
+      date = d.toLocaleString(locale, { day: "2-digit", month: "long", year: "numeric" });
+    }
+    return date;
+  }
 }
 
