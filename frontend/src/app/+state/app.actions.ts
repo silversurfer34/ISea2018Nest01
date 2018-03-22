@@ -34,6 +34,15 @@ export interface UpdateRoutes {
   payload: RouteInfoFromDb[];
 }
 
+export interface Loading{
+  type: 'LOADING',
+  payload: false;
+}
+
+export interface LoadRouteDataFromDb{
+  type: 'LOAD_ROUTE_DATA_FROM_DB'  
+}
+
 export type AppAction = 
 AddRouteData 
 | SetSnackbarMessage
@@ -41,4 +50,6 @@ AddRouteData
 | OpenUploadDialog
 | AppTitleSuffix
 | UpdateNewItemId
-| UpdateRoutes;
+| UpdateRoutes
+| LoadRouteDataFromDb
+| Loading;

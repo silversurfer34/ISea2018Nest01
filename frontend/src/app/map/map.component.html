@@ -3,6 +3,8 @@
   [longitude]="lng" 
   [fitBounds]="globalBounds"
   #gm
+  (mapClick)="clicked($event)"
+  (mapRightClick)="dblClicked($event)"
 >
   <styled-map></styled-map>
   <agm-polyline [strokeColor]="routeColor">
@@ -11,11 +13,15 @@
 
   <agm-polyline [strokeColor]="traceColor">
       <agm-polyline-point *ngFor="let point of tracePoints" [latitude]="point.latitude" [longitude]="point.longitude"></agm-polyline-point>
-  </agm-polyline>>
+  </agm-polyline>
   <!-- <agm-polygon [paths]="routePolygon" [strokeWeight]="2" [strokeColor]="blue" [clickable]="false"></agm-polygon> -->
   <!--<agm-polygon [paths]="tracePolygon" [strokeWeight]="2" [strokeColor]="red" [clickable]="false"></agm-polygon>-->
   <agm-marker *ngFor="let point of tracePoints" [latitude]="point.latitude" [longitude]="point.longitude" [title]="markerTitle(point)" [iconUrl]="'assets/marker_trace.svg'"></agm-marker>
   <agm-marker *ngFor="let point of routePoints" [markerClickable]="false" [latitude]="point.latitude" [longitude]="point.longitude" [iconUrl]="'assets/marker_route.svg'"></agm-marker>
+
+  <!-- <agm-polyline [strokeColor]="'#ff0000'">
+      <agm-polyline-point *ngFor="let point of newRoute" [latitude]="point.latitude" [longitude]="point.longitude"></agm-polyline-point>
+  </agm-polyline> -->
 </agm-map>
 
 <div class="viewData">

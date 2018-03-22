@@ -83,9 +83,7 @@ export class BackendService {
     ]   
     
     if(routeFile || traceFile){
-      this.loadAndSaveRouteData(filesInfo, timestamp);
-      this.saveRouteInfo(name, filesInfo, timestamp);      
-      // this.saveFile(filesInfo, timestamp);
+      this.loadAndSaveRouteData(name, filesInfo, timestamp);
     }
     else{
       this.store.dispatch({
@@ -106,42 +104,56 @@ export class BackendService {
     }).catch( err => console.log(err));
   }
 
-  loadAndSaveRouteData(info: FileInfo[], timestamp: number){
+  loadAndSaveRouteData(name: string, info: FileInfo[], timestamp: number){
     var reader = new FileReader(); 
     let me = this;    
-    function readFile(index, content) {      
-      if( index >= info.length){     
-        const routeDataToSave: RouteDataFromDb = {
-          id: timestamp,
-          route: content[0],
-          trace: content[1]
+    function readFile(index, content, error) {      
+      if( index >= info.length){
+        if( !error ){    
+          const routeDataToSave: RouteDataFromDb = {
+            id: timestamp,
+            route: content[0],
+            trace: content[1]
+          }
+          me.db.collection<RouteDataFromDb>(me.routesDataDb).add(
+            routeDataToSave
+          )
+          .then( value =>  { me.store.dispatch({
+                type: 'SET_SNACKBAR_MESSAGE',
+                payload: 'Route saved'
+              });
+              me.saveRouteInfo(name, info, timestamp);  
+            }
+          )
+          .catch( err => console.log(err)); 
         }
-        me.db.collection<RouteDataFromDb>(me.routesDataDb).add(
-          routeDataToSave
-        )
-        .then( value =>  me.store.dispatch({
+        else{
+          me.store.dispatch({
             type: 'SET_SNACKBAR_MESSAGE',
-            payload: 'Route saved'
+            payload: 'Error while saving'
           })
-        )
-        .catch( err => console.log(err)); 
-        return;        
+        }
+        return error;        
       }
 
       var file = info[index].file;
       reader.onload = function(e) {        
-        content[index] = JSON.parse(reader.result);
-        readFile(index+1, content);        
+        try{
+          content[index] = JSON.parse(reader.result)
+        } catch(err) {          
+          error = true;          
+        };
+        readFile(index+1, content, error);        
       }
       if(file){
         reader.readAsText(file);
       }
       else{
-        readFile(index + 1, content);
+        readFile(index + 1, content, error);
       }
       return content;
     }    
-    readFile(0, [{}, {}]); 
+    readFile(0, [{}, {}], false); 
   }
 
   saveFile(filesInfo: FileInfo[], timestamp: number){

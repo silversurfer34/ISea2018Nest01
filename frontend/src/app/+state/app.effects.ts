@@ -11,17 +11,36 @@ import { BackendService } from '../backend/backend.service';
 
 @Injectable()
 export class AppEffects {
-  // @Effect()
-  // updateClusterNumber$ = this.actions.ofType('MARKER_EDITED').pipe(
-  //   debounceTime(500, async),
-  //   map((action: LoadLqc) => {      
-  //     return {
-  //       type: 'UPDATE_MARKER',
-  //       payload: action.payload
-  //     };
-  //   })
-  // );
+  @Effect()
+  showProgressBar$ = this.actions
+    .ofType(
+      'LOAD_ROUTE_DATA_FROM_DB'
+    )
+    .pipe(
+      map((action) => {
+        console.log('loading...');
+        return {
+          type: 'LOADING',
+          payload: true
+        };
+      })
+    );
 
+  @Effect()
+  hideProgressBar$ = this.actions
+    .ofType(
+      'SET_SNACKBAR_MESSAGE',
+      'ADD_ROUTE_DATA',
+      'UPDATE_ROUTES'      
+    )
+    .pipe(
+      map((action) => {
+        return {
+          type: 'LOADING',
+          payload: false
+        };
+      })
+    );
   constructor(
     private actions: Actions,    
     private service: BackendService
