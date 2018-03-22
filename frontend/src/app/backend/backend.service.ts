@@ -11,6 +11,7 @@ export class BackendService {
   private readonly routesInfoDb: string = 'routesInfo';
   private readonly routesDataDb: string = 'routesData';  
 
+  private knownRouteIds: number[] = [];
   constructor(
     private db: AngularFirestore,
     private storage: AngularFireStorage,
@@ -18,7 +19,35 @@ export class BackendService {
   ) { }
 
   getExistingRoutes(){        
-    return this.db.collection<RouteInfoFromDb>(this.routesInfoDb).valueChanges();
+    this.db.collection<RouteInfoFromDb>(this.routesInfoDb).valueChanges().subscribe( itemsInDb => this.handleDbContent(itemsInDb) );
+  }
+
+  handleDbContent(itemsInDb: RouteInfoFromDb[]){
+    const currentIds = itemsInDb.map( item => item.id );
+    // we have already at least one route and we have a new one
+    if(this.knownRouteIds.length > 0 && this.knownRouteIds.length < currentIds.length){
+      const newIds = currentIds.filter( id => this.knownRouteIds.indexOf(id) < 0);
+      if(newIds.length > 0){
+        this.store.dispatch({
+          type: 'UPDATE_NEW_ITEM_ID',
+          payload: newIds[0]
+        })
+
+        setTimeout( () => {
+          this.store.dispatch({
+            type: 'UPDATE_NEW_ITEM_ID',
+            payload: -1
+          })
+        }, 2500);
+      }
+    }
+
+    this.store.dispatch({
+      type: "UPDATE_ROUTES",
+      payload: itemsInDb
+    })
+
+    this.knownRouteIds = currentIds;
   }
 
   getRouteName(routeId: number){
@@ -54,9 +83,7 @@ export class BackendService {
     ]   
     
     if(routeFile || traceFile){
-      this.loadAndSaveRouteData(filesInfo, timestamp);
-      this.saveRouteInfo(name, filesInfo, timestamp);      
-      this.saveFile(filesInfo, timestamp);
+      this.loadAndSaveRouteData(name, filesInfo, timestamp);
     }
     else{
       this.store.dispatch({
@@ -77,42 +104,56 @@ export class BackendService {
     }).catch( err => console.log(err));
   }
 
-  loadAndSaveRouteData(info: FileInfo[], timestamp: number){
+  loadAndSaveRouteData(name: string, info: FileInfo[], timestamp: number){
     var reader = new FileReader(); 
     let me = this;    
-    function readFile(index, content) {      
-      if( index >= info.length){     
-        const routeDataToSave: RouteDataFromDb = {
-          id: timestamp,
-          route: content[0],
-          trace: content[1]
+    function readFile(index, content, error) {      
+      if( index >= info.length){
+        if( !error ){    
+          const routeDataToSave: RouteDataFromDb = {
+            id: timestamp,
+            route: content[0],
+            trace: content[1]
+          }
+          me.db.collection<RouteDataFromDb>(me.routesDataDb).add(
+            routeDataToSave
+          )
+          .then( value =>  { me.store.dispatch({
+                type: 'SET_SNACKBAR_MESSAGE',
+                payload: 'Route saved'
+              });
+              me.saveRouteInfo(name, info, timestamp);  
+            }
+          )
+          .catch( err => console.log(err)); 
         }
-        me.db.collection<RouteDataFromDb>(me.routesDataDb).add(
-          routeDataToSave
-        )
-        .then( value =>  me.store.dispatch({
+        else{
+          me.store.dispatch({
             type: 'SET_SNACKBAR_MESSAGE',
-            payload: 'Route saved'
+            payload: 'Error while saving'
           })
-        )
-        .catch( err => console.log(err)); 
-        return;        
+        }
+        return error;        
       }
 
       var file = info[index].file;
       reader.onload = function(e) {        
-        content[index] = JSON.parse(reader.result);
-        readFile(index+1, content);        
+        try{
+          content[index] = JSON.parse(reader.result)
+        } catch(err) {          
+          error = true;          
+        };
+        readFile(index+1, content, error);        
       }
       if(file){
         reader.readAsText(file);
       }
       else{
-        readFile(index + 1, content);
+        readFile(index + 1, content, error);
       }
       return content;
     }    
-    readFile(0, [{}, {}]); 
+    readFile(0, [{}, {}], false); 
   }
 
   saveFile(filesInfo: FileInfo[], timestamp: number){

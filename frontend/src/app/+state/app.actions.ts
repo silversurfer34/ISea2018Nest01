@@ -1,4 +1,4 @@
-import { RouteDataFromDb } from "../datamodel/datamodel";
+import { RouteDataFromDb, RouteInfoFromDb } from "../datamodel/datamodel";
 
 export interface AddRouteData {
   type: 'ADD_ROUTE_DATA';
@@ -24,9 +24,32 @@ export interface AppTitleSuffix {
   payload: string;
 }
 
+export interface UpdateNewItemId {
+  type: 'UPDATE_NEW_ITEM_ID',
+  payload: number;
+}
+
+export interface UpdateRoutes {
+  type: 'UPDATE_ROUTES',
+  payload: RouteInfoFromDb[];
+}
+
+export interface Loading{
+  type: 'LOADING',
+  payload: false;
+}
+
+export interface LoadRouteDataFromDb{
+  type: 'LOAD_ROUTE_DATA_FROM_DB'  
+}
+
 export type AppAction = 
 AddRouteData 
 | SetSnackbarMessage
 | ClearSnackbarMessage
 | OpenUploadDialog
-| AppTitleSuffix;
+| AppTitleSuffix
+| UpdateNewItemId
+| UpdateRoutes
+| LoadRouteDataFromDb
+| Loading;

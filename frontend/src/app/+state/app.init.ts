@@ -4,5 +4,8 @@ export const AppInitialState: App = {
   displayedRoute: [],
   message: "",
   openUploadDialog: false,
-  appSuffix: ""
+  appSuffix: "",
+  newItemId: -1,
+  routesInfoFromDb: [],
+  loading: false
 };

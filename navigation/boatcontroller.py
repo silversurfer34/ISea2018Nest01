@@ -3,15 +3,19 @@ import time
 from route import Route
 from bearingcalculator import BearingCalculator
 from position import CurrentPosition
-from boat import Boat
+#from boat import Boat
+import sys
+sys.path.insert(0, '/home/pi/gitRepo/ISea2018Nest01/backend/modules')
+from servopi import ServoPI
 
 
 class Steering ( threading.Thread ):
 
-    def __init__ ( self, route, boat ):
+    def __init__ ( self, route, servopi ):
         threading.Thread.__init__ ( self )
         self.route = route
-        self.boat = boat
+        #self.boat = boat
+        self.servopi = servopi
 
     def run ( self ):
         print(self.route)
@@ -37,12 +41,16 @@ class Steering ( threading.Thread ):
                 angle = -45
             else:
                 angle = bearingDif
-            self.boat.setHelmAngle(angle)
+            #self.boat.setHelmAngle(angle)
+            self.servopi.setAngle(angle)
 
             if distance < 2:
                 self.route.passWaypoint()
                 print('Passed waypoint')
                 print(self.route)
+
+            sys.stdout.flush()
+
 
             time.sleep(1)
 

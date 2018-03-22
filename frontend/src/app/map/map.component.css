@@ -1,12 +1,18 @@
 agm-map {
-  height: 100%;
+  height: calc(100% - 64px);
   width: 100%;
+  position: absolute;
+  top: 64px;
+}
+
+.agm-map-container-inner{
+  height: 100% !important;
 }
 
 .viewData{
   display: flex;
   position: absolute;
-  top: 12px;
+  top: 76px;
   left: 20px;
 }
 
@@ -18,8 +24,8 @@ agm-map {
 .routeButton{
   background-color: transparent;
   box-shadow: unset;
-  border: 2px solid #99cc00;  
-  margin-right: 5px;
+  border: 2px solid #99cc00 !important;  
+  margin-right: 5px !important;
 }
 
 .traceButton.selected{
@@ -29,6 +35,6 @@ agm-map {
 
 .traceButton {
   background-color: transparent;
-  border: 2px solid #cc9900;  
+  border: 2px solid #cc9900 !important;  
   box-shadow: unset;
 }

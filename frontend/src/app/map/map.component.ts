@@ -1,18 +1,20 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../backend/backend.service';
 import { RouteDataFromDb, Point } from '../datamodel/datamodel';
+import { Observable } from 'rxjs/observable';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MapComponent implements OnInit {
   
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number = 43.6109200;
+  lng: number = 3.8772300;
   private globalBounds;
   private routeBounds;
   private traceBounds;
@@ -24,6 +26,8 @@ export class MapComponent implements OnInit {
   private tracePoints: Point[];
   private cacheTracePoints: Point[];
 
+  private newRoute: Point[] = [];
+
   private materialButtonClass = "mat-raised-button";
   private traceSelected: string = "selected";
   private routeSelected: string = "selected";
@@ -34,7 +38,8 @@ export class MapComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private backend: BackendService
-  ) {   
+  ) {  
+    this.clearData(); 
     this.activatedRoute.params
     .map(param => {
       if (param && param.id) {
@@ -47,8 +52,7 @@ export class MapComponent implements OnInit {
           payload: 'Missing route information'
         });
         // this.router.navigateByUrl('/home');
-      }
-      this.clearData();
+      }      
     })
     .subscribe();
 
@@ -59,6 +63,9 @@ export class MapComponent implements OnInit {
   }
 
   private getRouteData(){
+    this.store.dispatch({
+      type: 'LOAD_ROUTE_DATA_FROM_DB'
+    });
     this.backend.getRouteData(this.routeId);
     this.backend.getRouteName(this.routeId);
   }
@@ -166,9 +173,21 @@ export class MapComponent implements OnInit {
       title += 'Speed: ' + point.speed + "knots \n";
     }
     if(point.time){
-      const d = new Date(point.time * 1000);
+      const d = new Date(point.time);
       title += 'Time: ' + d.toLocaleString();
     }
+    if(!title){
+      title = "No info";
+    }
     return title;
+  }
+
+  private clicked($event){    
+    this.newRoute.push( { latitude: $event.coords.lat, longitude: $event.coords.lng});
+  }
+
+  private dblClicked($event){
+    let route = { points: this.newRoute };
+    console.log(JSON.stringify(route));    
   }
 }
