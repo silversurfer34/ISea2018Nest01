@@ -22,7 +22,6 @@ class CurrentPosition:
     bearing = 0
 
     aGPS = GPS.GPSPosition()
-    aGPS.run()
 
     @staticmethod
     def getCurrentPosition():
