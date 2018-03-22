@@ -1,3 +1,30 @@
+@keyframes newItemAdded {
+  0% {
+    opacity: 0;    
+  }
+  25% {
+    opacity: .25;
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  75% {
+    opacity: .75;
+  }
+  
+  100% {
+    opacity: 1;    
+  }
+}
+
+.newItemAdded{
+  animation-name: newItemAdded;
+  animation-duration: 2s;
+  /* animation-iteration-count: 5; */
+}
+
 .mat-row:hover .iconRoute{
   display:block;
 }

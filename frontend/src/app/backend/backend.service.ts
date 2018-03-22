@@ -11,6 +11,7 @@ export class BackendService {
   private readonly routesInfoDb: string = 'routesInfo';
   private readonly routesDataDb: string = 'routesData';  
 
+  private knownRouteIds: number[] = [];
   constructor(
     private db: AngularFirestore,
     private storage: AngularFireStorage,
@@ -18,7 +19,35 @@ export class BackendService {
   ) { }
 
   getExistingRoutes(){        
-    return this.db.collection<RouteInfoFromDb>(this.routesInfoDb).valueChanges();
+    this.db.collection<RouteInfoFromDb>(this.routesInfoDb).valueChanges().subscribe( itemsInDb => this.handleDbContent(itemsInDb) );
+  }
+
+  handleDbContent(itemsInDb: RouteInfoFromDb[]){
+    const currentIds = itemsInDb.map( item => item.id );
+    // we have already at least one route and we have a new one
+    if(this.knownRouteIds.length > 0 && this.knownRouteIds.length < currentIds.length){
+      const newIds = currentIds.filter( id => this.knownRouteIds.indexOf(id) < 0);
+      if(newIds.length > 0){
+        this.store.dispatch({
+          type: 'UPDATE_NEW_ITEM_ID',
+          payload: newIds[0]
+        })
+
+        setTimeout( () => {
+          this.store.dispatch({
+            type: 'UPDATE_NEW_ITEM_ID',
+            payload: -1
+          })
+        }, 2500);
+      }
+    }
+
+    this.store.dispatch({
+      type: "UPDATE_ROUTES",
+      payload: itemsInDb
+    })
+
+    this.knownRouteIds = currentIds;
   }
 
   getRouteName(routeId: number){
@@ -56,7 +85,7 @@ export class BackendService {
     if(routeFile || traceFile){
       this.loadAndSaveRouteData(filesInfo, timestamp);
       this.saveRouteInfo(name, filesInfo, timestamp);      
-      this.saveFile(filesInfo, timestamp);
+      // this.saveFile(filesInfo, timestamp);
     }
     else{
       this.store.dispatch({

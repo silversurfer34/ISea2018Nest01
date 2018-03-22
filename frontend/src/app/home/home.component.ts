@@ -16,12 +16,15 @@ export class HomeComponent implements OnInit {
   displayedColumns = ['route', 'trace', 'name', 'date', 'launchMapView'];
   dataSource: MatTableDataSource<RouteInfoFromDb>;
 
+  newItemId: number;
+
   constructor(
     private backend: BackendService,
     private store: Store<any>
   ) { 
-    this.backend.getExistingRoutes().subscribe( changed => this.fillDataSource(changed));
-    
+    this.backend.getExistingRoutes();//.subscribe( changed => this.fillDataSource(changed));
+    this.store.select('app', 'newItemId').subscribe( newItemId => this.newItemId = newItemId);
+    this.store.select('app', 'routesInfoFromDb').subscribe( routes => this.fillDataSource(routes));
   }
 
   ngOnInit() {
@@ -44,6 +47,14 @@ export class HomeComponent implements OnInit {
       type: 'OPEN_UPLOAD_DIALOG',
       payload: true
     })
+  }
+
+  getClass(id){
+    let suffix=""
+    if(id == this.newItemId){
+      suffix=" newItemAdded"
+    }
+    return 'mat-row' + suffix;
   }
 }
 
