@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BackendService } from '../backend/backend.service';
 import { Observable } from 'rxjs/Observable';
 import { RouteInfoFromDb } from '../datamodel/datamodel';
 import { Store } from '@ngrx/store';
-import {MatTableDataSource} from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort} from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   dataSource: MatTableDataSource<RouteInfoFromDb>;
 
   newItemId: number;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private backend: BackendService,
@@ -27,12 +29,29 @@ export class HomeComponent implements OnInit {
     this.store.select('app', 'routesInfoFromDb').subscribe( routes => this.fillDataSource(routes));
   }
 
+  /**
+   * Set the paginator after the view init since this component will
+   * be able to query its view for the initialized paginator.
+   */
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
   ngOnInit() {
   }
 
   private fillDataSource(changed:RouteInfoFromDb[]) {
     this.ELEMENT_DATA=changed;
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   onDisplayIcon(fileName, imgSrc) {
