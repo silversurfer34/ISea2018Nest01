@@ -18,7 +18,6 @@ export class AppEffects {
     )
     .pipe(
       map((action) => {
-        console.log('loading...');
         return {
           type: 'LOADING',
           payload: true

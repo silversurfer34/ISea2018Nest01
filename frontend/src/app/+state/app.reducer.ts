@@ -55,7 +55,6 @@ export function AppReducer(state: App, action: AppAction): App {
     }
 
     case 'LOADING': {
-      console.log('reducer for loading');
       return {
         ...state,
         loading: action.payload
