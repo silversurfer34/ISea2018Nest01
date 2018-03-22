@@ -19,12 +19,15 @@ class GPSPosition:
     datetime = 0
     num_sats = 0
     horizontal_dil = 0
+    
+    lock = threading.Lock()
        
     def refresh(self, serialPort):
         print ("refresh")
         while True:
             try:
-                data =serialPort.readline()
+                #self.lock.acquire()
+                data = serialPort.readline()
                 data = data.decode('ascii', errors='ignore')
                 start = data.find("$GP")
                 if start < 0:
@@ -45,8 +48,10 @@ class GPSPosition:
                     self.direction = gp.true_course
                     self.datetime = gp.datetime
                     self.datetime = self.datetime.isoformat()
-                    #print (self.datetime, self.longitude, self.latitude, self.speed, self.direction)
             except:
+                pass
+            finally:
+                #self.lock.release()
                 pass
             #    print ("wait for data")
             #    time.sleep(1)

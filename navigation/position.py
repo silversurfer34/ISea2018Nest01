@@ -26,17 +26,15 @@ class CurrentPosition:
     longitude = 0
     speed = 0
     bearing = 0
-    lock = Lock()
     
     aGPS = GPS.GPSPosition()
-    aGPS.run()
-    
+    aGPS.run()    
 
     @staticmethod
     def getCurrentPosition():
-        CurrentPosition.lock.acquire()
+        CurrentPosition.aGPS.lock.acquire()
         #position = Position(CurrentPosition.time, CurrentPosition.latitude, CurrentPosition.longitude, CurrentPosition.speed, CurrentPosition.bearing)
         position = Position(CurrentPosition.aGPS)
-        CurrentPosition.lock.release()
+        CurrentPosition.aGPS.lock.release()
         return position
 
