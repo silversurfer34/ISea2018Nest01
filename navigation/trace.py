@@ -28,7 +28,7 @@ class TraceThread ( threading.Thread ):
               if isFirstElement == True:
                   pos = file.tell() - 4
               else:
-                  pos = file.tell() - 10
+                  pos = file.tell() - 8
               file.seek(pos, os.SEEK_SET)
               file.truncate()
               if isFirstElement == False:
