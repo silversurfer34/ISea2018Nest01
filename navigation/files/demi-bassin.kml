@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Jacques coeur</name>
+    <Style id="line-FF5252-4875-nodesc-normal">
+      <LineStyle>
+        <color>ff5252ff</color>
+        <width>4.875</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-FF5252-4875-nodesc-highlight">
+      <LineStyle>
+        <color>ff5252ff</color>
+        <width>7.3125</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-FF5252-4875-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-FF5252-4875-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-FF5252-4875-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>Jacques coeur</name>
+      <styleUrl>#line-FF5252-4875-nodesc</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          3.8996905,43.5993284,0
+          3.9000338,43.5990603,0
+          3.9005488,43.5993614,0
+          3.9000982,43.5995479,0
+          3.90005,43.5998451,0
+          3.8995939,43.5997712,0
+          3.8996503,43.5993983,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>
