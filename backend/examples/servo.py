@@ -35,8 +35,10 @@ if choix == 2 :
 
     while i <= nbrTour:
          pwm.ChangeDutyCycle(duty1)
+         print duty1
          time.sleep(0.8)
          pwm.ChangeDutyCycle(duty2)
+         print duty2
          time.sleep(0.8)
          i = i+1
     GPIO.cleanup()

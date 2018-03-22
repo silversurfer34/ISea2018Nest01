@@ -12,9 +12,9 @@
 import RPi.GPIO as GPIO
 import time
 
-LedPin = 11    # pin11
-
-GPIO.setmode(GPIO.BOARD)       # Numbers pins by physical location
+LedPin = 17    # pin11
+GPIO.setmode(GPIO.BCM)
+#GPIO.setmode(GPIO.BOARD)       # Numbers pins by physical location
 GPIO.setup(LedPin, GPIO.OUT)   # Set pin mode as output
 GPIO.output(LedPin, GPIO.HIGH) # Set pin to high(+3.3V) to off the led
 
