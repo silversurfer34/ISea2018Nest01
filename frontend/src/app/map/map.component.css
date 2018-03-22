@@ -1,12 +1,18 @@
 agm-map {
-  height: 100%;
+  height: calc(100% - 64px);
   width: 100%;
+  position: absolute;
+  top: 64px;
+}
+
+.agm-map-container-inner{
+  height: 100% !important;
 }
 
 .viewData{
   display: flex;
   position: absolute;
-  top: 12px;
+  top: 76px;
   left: 20px;
 }
 

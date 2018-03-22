@@ -35,6 +35,8 @@ border-width: 2px;
 }
 
 .bandeau{
+  position: relative;
+  top: 64px;
   height: 60px;
   display: flex;
   align-items: center;
@@ -44,4 +46,10 @@ border-width: 2px;
 .buttonAdd{
   margin-left: 20px;
   min-width: 36px;
+}
+
+.dataTable{
+  position: relative;
+  top: 60px;
+  width: 100%
 }
