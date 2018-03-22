@@ -1,7 +1,10 @@
 <div class="bandeau">
   <button mat-raised-button color="primary" class="buttonAdd" (click)="openUploadDialog()"><img src="../assets/add.png" height="24" width="24"></button>
+  <mat-form-field class="filterForm">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
 </div>
-<div>
+<div class="dataTable">
 <mat-table #table [dataSource]="dataSource" matSort>
 
     <!-- route exist -->
@@ -34,6 +37,9 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [class]="getClass(row.id)"></mat-row>
   </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
 </div>
