@@ -12,7 +12,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'app';  
-  private appSuffix$: Observable<string>;
+  private appSuffix$: Observable<string>;  
+  private loading$: Observable<boolean>;
+  
   constructor(
     private store: Store<any>,
     private snackbar: MatSnackBar,
@@ -36,6 +38,7 @@ export class AppComponent {
 
     this.store.select('app', 'openUploadDialog').subscribe( val => { if(val){this.launchDialog()} });
     this.appSuffix$ = this.store.select('app', 'appSuffix');
+    this.loading$ = this.store.select('app', 'loading');
   }
 
   launchDialog() {

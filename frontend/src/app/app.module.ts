@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { StyledMapDirective } from './map/styled-map.directive';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { StyledMapDirective } from './map/styled-map.directive';
     HomeComponent,
     UploadRouteComponent,
     MapComponent,
-    StyledMapDirective
+    StyledMapDirective,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,

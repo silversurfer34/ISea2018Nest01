@@ -7,6 +7,7 @@ export interface App {
   appSuffix: string;
   newItemId: number;
   routesInfoFromDb: RouteInfoFromDb[];
+  loading: false;
 }
 
 export interface AppState {

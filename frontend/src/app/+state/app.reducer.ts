@@ -53,6 +53,14 @@ export function AppReducer(state: App, action: AppAction): App {
         routesInfoFromDb: action.payload
       }
     }
+
+    case 'LOADING': {
+      console.log('reducer for loading');
+      return {
+        ...state,
+        loading: action.payload
+      };
+    }
       
     default: {
       return state;

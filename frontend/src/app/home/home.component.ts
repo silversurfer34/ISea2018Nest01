@@ -23,7 +23,10 @@ export class HomeComponent implements OnInit {
   constructor(
     private backend: BackendService,
     private store: Store<any>
-  ) { 
+  ) {
+    this.store.dispatch({
+      type: 'LOAD_ROUTE_DATA_FROM_DB'
+    })
     this.backend.getExistingRoutes();//.subscribe( changed => this.fillDataSource(changed));
     this.store.select('app', 'newItemId').subscribe( newItemId => this.newItemId = newItemId);
     this.store.select('app', 'routesInfoFromDb').subscribe( routes => this.fillDataSource(routes));
