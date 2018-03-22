@@ -19,6 +19,11 @@ export class AppComponent {
     private dialog: MatDialog,
     private router: Router
   ){
+    this.store.dispatch({
+      type: 'APP_TITLE_SUFFIX',
+      payload: 'Home'
+    });
+    
     this.store.select('app', 'message').map( msg => {
       if(msg){
         this.snackbar.open( msg, '', {duration: 1500}).afterDismissed().map( val => {          

@@ -21,13 +21,15 @@ import { UploadRouteComponent } from './upload-route/upload-route.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
+import { StyledMapDirective } from './map/styled-map.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     UploadRouteComponent,
-    MapComponent
+    MapComponent,
+    StyledMapDirective
   ],
   imports: [
     BrowserModule,

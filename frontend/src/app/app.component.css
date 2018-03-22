@@ -14,17 +14,19 @@
     letter-spacing: 5px;
 }
 
-.content{
-    height: calc( 100% - 64px);
-    position: relative;
-}
-
 .div-button:hover{    
     cursor: pointer;    
 }
 
 .div-button{
-    margin-left: 32px;
+    
     display: flex; 
     align-items: center;
+}
+
+.toolbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2
 }

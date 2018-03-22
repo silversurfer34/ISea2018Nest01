@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../backend/backend.service';
@@ -7,7 +7,8 @@ import { RouteDataFromDb, Point } from '../datamodel/datamodel';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MapComponent implements OnInit {
   
@@ -155,5 +156,20 @@ export class MapComponent implements OnInit {
       this.routeSelected = 'selected';
       this.routePoints = this.cacheRoutePoints;
     }
+  }
+
+  private markerTitle(point: Point){    
+    let title="";
+    if(point.bearing){
+      title += 'Bearing: ' + point.bearing + " \n";
+    }
+    if(point.speed){
+      title += 'Speed: ' + point.speed + "knots \n";
+    }
+    if(point.time){
+      const d = new Date(point.time * 1000);
+      title += 'Time: ' + d.toLocaleString();
+    }
+    return title;
   }
 }

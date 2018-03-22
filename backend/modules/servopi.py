@@ -14,7 +14,7 @@ class ServoPI:
 
 	def setAngle(self, angle):
 		### From -45 to 45, 0 is the neutral position
-		print "Setting angle : ", angle
+		print("Setting angle : ", angle)
 		
 		if( angle>45 ):
 			angle=45
