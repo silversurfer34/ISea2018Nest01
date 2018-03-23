@@ -16,12 +16,16 @@ atexit.register(cleanup)
 
 def main():
 
-
-	angles = [0, 45, 90, 135, 180, 135, 90, 45]
+	#~ while(True):
+		#~ msg = "yoyoyo"
+		#~ myServo.fInThread(msg)
+		#~ myServo.fInThread("toto")
+	#~ time.sleep(10)
+	angles = [0, 45, 90, 135, 180]
 	while(True):
 		for angle in angles:
 			myServo.setAngle(angle)
-			time.sleep(3)
+			time.sleep(0)
 
 	
 if __name__ == "__main__":
