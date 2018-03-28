@@ -31,17 +31,18 @@ class GPSPosition:
                 data = data.decode('ascii', errors='ignore')
                 start = data.find("$GP")
                 if start < 0:
+                    print("unknown frame")
                     continue
                 data = data[start:]
                 gp = nmea.NMEASentence.parse(data)
                 if 'GGA' == gp.sentence_type:
-                    #print (gp.sentence_type)
+                    print (gp.sentence_type)
                     #print (gp.timestamp)
                     self.num_sats = gp.num_sats
                     self.horizontal_dil = gp.horizontal_dil
-                    #print (self.num_sats, self.horizontal_dil)
+                    print (self.num_sats, self.horizontal_dil)
                 elif 'RMC' == gp.sentence_type:
-                    #print (gp.sentence_type)
+                    print (gp.sentence_type)
                     self.longitude = gp.longitude
                     self.latitude = gp.latitude
                     self.speed = gp.spd_over_grnd

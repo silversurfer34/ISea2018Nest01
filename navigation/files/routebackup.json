@@ -1,0 +1,33 @@
+{
+    "TraceName": "MpTC",
+    "Points": [
+		{
+			"latitude": 43.5993284,
+			"longitude": 3.8996905
+		},
+		{
+			"latitude": 43.5990603,
+			"longitude": 3.9000338
+		},
+		{
+			"latitude": 43.5993614,
+			"longitude": 3.9005488
+		},
+		{
+			"latitude": 43.5995479,
+			"longitude": 3.9000982
+		},
+		{
+			"latitude": 43.5998451,
+			"longitude": 3.90005
+		},
+		{
+			"latitude": 43.5997712,
+			"longitude": 3.8995939
+		},
+		{
+			"latitude": 43.5993983,
+			"longitude": 3.8996503
+		}
+    ]
+}

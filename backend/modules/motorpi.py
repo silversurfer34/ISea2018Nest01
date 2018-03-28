@@ -56,7 +56,7 @@ class MotorPI:
 
         for speed in range(self.previousSpeed, newSpeed + increment, increment):
             width = self.minPulse + (self.maxPulse - self.minPulse) * speed / 100.0
-            print("speed", speed, "width", width)
+            #print("speed", speed, "width", width)
             self.pi.set_servo_pulsewidth(self.pin, width)
             time.sleep(0.1)
 

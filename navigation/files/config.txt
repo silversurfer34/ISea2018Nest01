@@ -3,6 +3,6 @@
     "helmgain": 0.5,
     "helmmax": 45,
     "helmtrim": -4,
-    "motorspeed": 40,
+    "motorspeed": 1,
     "controlfrequency": 1
 }

@@ -1,0 +1,50 @@
+{
+    "TraceName": "",
+    "Points": 
+{
+        "bearing": 0,
+        "speed": 0,
+        "distancetonextwaypoint": 0,
+        "latitude": 0,
+        "bearingtonextwaypoint": 0,
+        "time": 0,
+        "longitude": 0
+},
+{
+        "bearing": 0,
+        "speed": 0,
+        "distancetonextwaypoint": 4844859.311036418,
+        "latitude": 0,
+        "bearingtonextwaypoint": 4.110135936384402,
+        "time": 0,
+        "longitude": 0
+},
+{
+        "bearing": 0,
+        "speed": 0,
+        "distancetonextwaypoint": 4844859.311036418,
+        "latitude": 0,
+        "bearingtonextwaypoint": 4.110135936384402,
+        "time": 0,
+        "longitude": 0
+},
+{
+        "bearing": 0,
+        "speed": 0,
+        "distancetonextwaypoint": 4844859.311036418,
+        "latitude": 0,
+        "bearingtonextwaypoint": 4.110135936384402,
+        "time": 0,
+        "longitude": 0
+},
+{
+        "bearing": 0,
+        "speed": 0,
+        "distancetonextwaypoint": 4844859.311036418,
+        "latitude": 0,
+        "bearingtonextwaypoint": 4.110135936384402,
+        "time": 0,
+        "longitude": 0
+}
+    ]
+}

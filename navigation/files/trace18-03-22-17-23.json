@@ -1,0 +1,320 @@
+{
+    "Points": [],
+    "TraceName": 
+{
+        "speed": 0.12,
+        "time": "2018-03-22T17:23:18",
+        "latitude": 43.599113333333335,
+        "bearing": 80.82,
+        "longitude": 3.8996633333333333,
+        "bearingtonextwaypoint": 0,
+        "distancetonextwaypoint": 0
+},
+{
+        "speed": 0.08,
+        "time": "2018-03-22T17:23:19",
+        "latitude": 43.599111666666666,
+        "bearing": 80.82,
+        "longitude": 3.899665,
+        "bearingtonextwaypoint": 101.14325843688556,
+        "distancetonextwaypoint": 30.487870449177297
+},
+{
+        "speed": 0.12,
+        "time": "2018-03-22T17:23:20",
+        "latitude": 43.599108333333334,
+        "bearing": 80.82,
+        "longitude": 3.8996633333333333,
+        "bearingtonextwaypoint": 100.11543994572769,
+        "distancetonextwaypoint": 30.385397598445007
+},
+{
+        "speed": 0.1,
+        "time": "2018-03-22T17:23:21",
+        "latitude": 43.599106666666664,
+        "bearing": 80.82,
+        "longitude": 3.899661666666667,
+        "bearingtonextwaypoint": 99.72840691792291,
+        "distancetonextwaypoint": 30.48605259474306
+},
+{
+        "speed": 0.09,
+        "time": "2018-03-22T17:23:22",
+        "latitude": 43.59910333333333,
+        "bearing": 80.82,
+        "longitude": 3.899665,
+        "bearingtonextwaypoint": 99.72840691792291,
+        "distancetonextwaypoint": 30.48605259474306
+},
+{
+        "speed": 0.11,
+        "time": "2018-03-22T17:23:23",
+        "latitude": 43.59910166666667,
+        "bearing": 80.82,
+        "longitude": 3.8996666666666666,
+        "bearingtonextwaypoint": 99.12135224548967,
+        "distancetonextwaypoint": 30.15988752318225
+},
+{
+        "speed": 0.12,
+        "time": "2018-03-22T17:23:24",
+        "latitude": 43.5991,
+        "bearing": 80.82,
+        "longitude": 3.8996683333333335,
+        "bearingtonextwaypoint": 98.5010953917685,
+        "distancetonextwaypoint": 29.837181880145923
+},
+{
+        "speed": 0.12,
+        "time": "2018-03-22T17:23:25",
+        "latitude": 43.59909833333333,
+        "bearing": 80.82,
+        "longitude": 3.89967,
+        "bearingtonextwaypoint": 98.18592700416457,
+        "distancetonextwaypoint": 29.67716165780534
+},
+{
+        "speed": 0.51,
+        "time": "2018-03-22T17:23:26",
+        "latitude": 43.59909833333333,
+        "bearing": 80.82,
+        "longitude": 3.899665,
+        "bearingtonextwaypoint": 98.0764171964751,
+        "distancetonextwaypoint": 30.07682457527031
+},
+{
+        "speed": 0.45,
+        "time": "2018-03-22T17:23:27",
+        "latitude": 43.59909666666667,
+        "bearing": 80.82,
+        "longitude": 3.899661666666667,
+        "bearingtonextwaypoint": 98.0764171964751,
+        "distancetonextwaypoint": 30.07682457527031
+},
+{
+        "speed": 0.06,
+        "time": "2018-03-22T17:23:28",
+        "latitude": 43.599095,
+        "bearing": 80.82,
+        "longitude": 3.89966,
+        "bearingtonextwaypoint": 97.27912279805214,
+        "distancetonextwaypoint": 30.42745603616424
+},
+{
+        "speed": 0.38,
+        "time": "2018-03-22T17:23:29",
+        "latitude": 43.599095,
+        "bearing": 80.82,
+        "longitude": 3.8996633333333333,
+        "bearingtonextwaypoint": 97.34390828985812,
+        "distancetonextwaypoint": 30.16049684503076
+},
+{
+        "speed": 0.4,
+        "time": "2018-03-22T17:23:30",
+        "latitude": 43.59909666666667,
+        "bearing": 80.82,
+        "longitude": 3.8996666666666666,
+        "bearingtonextwaypoint": 97.7615169192317,
+        "distancetonextwaypoint": 29.91802160360809
+},
+{
+        "speed": 0.33,
+        "time": "2018-03-22T17:23:31",
+        "latitude": 43.5991,
+        "bearing": 80.82,
+        "longitude": 3.89967,
+        "bearingtonextwaypoint": 97.7615169192317,
+        "distancetonextwaypoint": 29.91802160360809
+},
+{
+        "speed": 0.03,
+        "time": "2018-03-22T17:23:32",
+        "latitude": 43.599105,
+        "bearing": 80.82,
+        "longitude": 3.8996716666666664,
+        "bearingtonextwaypoint": 99.63941284296747,
+        "distancetonextwaypoint": 29.65896649278746
+},
+{
+        "speed": 0.42,
+        "time": "2018-03-22T17:23:33",
+        "latitude": 43.599106666666664,
+        "bearing": 80.82,
+        "longitude": 3.8996750000000002,
+        "bearingtonextwaypoint": 100.0826437482589,
+        "distancetonextwaypoint": 29.42550627014866
+},
+{
+        "speed": 0.46,
+        "time": "2018-03-22T17:23:34",
+        "latitude": 43.599105,
+        "bearing": 80.82,
+        "longitude": 3.8996733333333333,
+        "bearingtonextwaypoint": 99.68314116412925,
+        "distancetonextwaypoint": 29.526301340031246
+},
+{
+        "speed": 0.44,
+        "time": "2018-03-22T17:23:35",
+        "latitude": 43.59910333333333,
+        "bearing": 80.82,
+        "longitude": 3.8996716666666664,
+        "bearingtonextwaypoint": 99.68314116412925,
+        "distancetonextwaypoint": 29.526301340031246
+},
+{
+        "speed": 0.46,
+        "time": "2018-03-22T17:23:36",
+        "latitude": 43.59910333333333,
+        "bearing": 80.82,
+        "longitude": 3.89967,
+        "bearingtonextwaypoint": 99.28637602151645,
+        "distancetonextwaypoint": 29.628522101102476
+},
+{
+        "speed": 0.19,
+        "time": "2018-03-22T17:23:37",
+        "latitude": 43.59910166666667,
+        "bearing": 80.82,
+        "longitude": 3.8996666666666666,
+        "bearingtonextwaypoint": 98.81289192283326,
+        "distancetonextwaypoint": 29.998095267402334
+},
+{
+        "speed": 0.15,
+        "time": "2018-03-22T17:23:38",
+        "latitude": 43.5991,
+        "bearing": 80.82,
+        "longitude": 3.8996666666666666,
+        "bearingtonextwaypoint": 98.46306217536467,
+        "distancetonextwaypoint": 29.970283723519575
+},
+{
+        "speed": 0.19,
+        "time": "2018-03-22T17:23:39",
+        "latitude": 43.5991,
+        "bearing": 80.82,
+        "longitude": 3.8996683333333335,
+        "bearingtonextwaypoint": 98.46306217536467,
+        "distancetonextwaypoint": 29.970283723519575
+},
+{
+        "speed": 0.16,
+        "time": "2018-03-22T17:23:40",
+        "latitude": 43.59909833333333,
+        "bearing": 80.82,
+        "longitude": 3.8996666666666666,
+        "bearingtonextwaypoint": 98.5010953917685,
+        "distancetonextwaypoint": 29.837181880145923
+},
+{
+        "speed": 0.09,
+        "time": "2018-03-22T17:23:41",
+        "latitude": 43.59909833333333,
+        "bearing": 80.82,
+        "longitude": 3.8996716666666664,
+        "bearingtonextwaypoint": 98.22308862147446,
+        "distancetonextwaypoint": 29.543965211022222
+},
+{
+        "speed": 0.11,
+        "time": "2018-03-22T17:23:42",
+        "latitude": 43.59909833333333,
+        "bearing": 80.82,
+        "longitude": 3.8996716666666664,
+        "bearingtonextwaypoint": 98.22308862147446,
+        "distancetonextwaypoint": 29.543965211022222
+},
+{
+        "speed": 0.13,
+        "time": "2018-03-22T17:23:43",
+        "latitude": 43.59909666666667,
+        "bearing": 80.82,
+        "longitude": 3.8996716666666664,
+        "bearingtonextwaypoint": 97.86735115334548,
+        "distancetonextwaypoint": 29.518049126857104
+},
+{
+        "speed": 0.1,
+        "time": "2018-03-22T17:23:44",
+        "latitude": 43.59909666666667,
+        "bearing": 80.82,
+        "longitude": 3.8996750000000002,
+        "bearingtonextwaypoint": 97.86735115334548,
+        "distancetonextwaypoint": 29.518049126857104
+},
+{
+        "speed": 0.09,
+        "time": "2018-03-22T17:23:45",
+        "latitude": 43.59909666666667,
+        "bearing": 80.82,
+        "longitude": 3.8996750000000002,
+        "bearingtonextwaypoint": 97.9395150500019,
+        "distancetonextwaypoint": 29.251458034589387
+},
+{
+        "speed": 0.11,
+        "time": "2018-03-22T17:23:46",
+        "latitude": 43.59909666666667,
+        "bearing": 80.82,
+        "longitude": 3.899678333333333,
+        "bearingtonextwaypoint": 98.01300627508078,
+        "distancetonextwaypoint": 28.984914197641626
+},
+{
+        "speed": 0.57,
+        "time": "2018-03-22T17:23:47",
+        "latitude": 43.599095,
+        "bearing": 80.82,
+        "longitude": 3.8996816666666665,
+        "bearingtonextwaypoint": 97.72177051220156,
+        "distancetonextwaypoint": 28.692952223448074
+},
+{
+        "speed": 0.74,
+        "time": "2018-03-22T17:23:48",
+        "latitude": 43.599091666666666,
+        "bearing": 129.3,
+        "longitude": 3.8996833333333334,
+        "bearingtonextwaypoint": 97.72177051220156,
+        "distancetonextwaypoint": 28.692952223448074
+},
+{
+        "speed": 0.75,
+        "time": "2018-03-22T17:23:49",
+        "latitude": 43.59909,
+        "bearing": 128.31,
+        "longitude": 3.8996866666666667,
+        "bearingtonextwaypoint": 96.71428751057834,
+        "distancetonextwaypoint": 28.222613205346107
+},
+{
+        "speed": 0.49,
+        "time": "2018-03-22T17:23:50",
+        "latitude": 43.599091666666666,
+        "bearing": 128.31,
+        "longitude": 3.899688333333333,
+        "bearingtonextwaypoint": 97.12118951840809,
+        "distancetonextwaypoint": 28.111321503945504
+},
+{
+        "speed": 0.28,
+        "time": "2018-03-22T17:23:51",
+        "latitude": 43.59909,
+        "bearing": 128.31,
+        "longitude": 3.89969,
+        "bearingtonextwaypoint": 96.77878563517365,
+        "distancetonextwaypoint": 27.955329218420747
+},
+{
+        "speed": 0.23,
+        "time": "2018-03-22T17:23:52",
+        "latitude": 43.59909,
+        "bearing": 128.31,
+        "longitude": 3.8996916666666666,
+        "bearingtonextwaypoint": 96.77878563517365,
+        "distancetonextwaypoint": 27.955329218420747
+}
+    ]
+}
