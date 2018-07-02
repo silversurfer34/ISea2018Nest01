@@ -26,9 +26,6 @@ export class MapComponent implements OnInit {
   private tracePoints: Point[];
   private cacheTracePoints: Point[];
 
-  private newRoute: Point[] = [];
-  private mapMoved: boolean = false;
-
   private materialButtonClass = "mat-raised-button";
   private traceSelected: string = "selected";
   private routeSelected: string = "selected";
@@ -181,23 +178,5 @@ export class MapComponent implements OnInit {
       title = "No info";
     }
     return title;
-  }
-
-  private clicked($event){    
-    this.newRoute.push( { latitude: $event.coords.lat, longitude: $event.coords.lng});
-  }
-
-  private dblClicked($event){
-    let route = { points: this.newRoute };
-    console.log(JSON.stringify(route));    
-  }
-
-  private centerChanged($event){
-    this.mapMoved = true;
-  }
-
-  private resetBounds(){
-    this.fitBounds();
-    this.mapMoved = false;
   }
 }

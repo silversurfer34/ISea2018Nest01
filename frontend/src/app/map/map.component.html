@@ -4,8 +4,6 @@
   [fitBounds]="globalBounds"
   #gm
   (mapClick)="clicked($event)"
-  (mapRightClick)="dblClicked($event)"
-  (centerChange)="centerChanged($event)"
 >
   <styled-map></styled-map>
   <agm-polyline [strokeColor]="routeColor">
@@ -19,19 +17,9 @@
   <!--<agm-polygon [paths]="tracePolygon" [strokeWeight]="2" [strokeColor]="red" [clickable]="false"></agm-polygon>-->
   <agm-marker *ngFor="let point of tracePoints" [latitude]="point.latitude" [longitude]="point.longitude" [title]="markerTitle(point)" [iconUrl]="'assets/marker_trace.svg'"></agm-marker>
   <agm-marker *ngFor="let point of routePoints" [markerClickable]="false" [latitude]="point.latitude" [longitude]="point.longitude" [iconUrl]="'assets/marker_route.svg'"></agm-marker>
-
-  <agm-polyline [strokeColor]="'#ff0000'" [editable]="true">
-      <agm-polyline-point *ngFor="let point of newRoute" [latitude]="point.latitude" [longitude]="point.longitude"></agm-polyline-point>
-  </agm-polyline>
 </agm-map>
 
 <div class="viewData">
   <button mat-raised-button *ngIf="cacheRoutePoints !== undefined" class="routeButton {{materialButtonClass}} {{routeSelected}}" (click)="showOrHideRoute()">route</button>
   <button mat-raised-button *ngIf="cacheTracePoints !== undefined" class="traceButton {{materialButtonClass}} {{traceSelected}}" (click)="showOrHideTrace()">trace</button>
 </div>
-
-<!-- <div class="optionsButton" *ngIf="true">
-    <button mat-mini-fab  color="primary" (click)="resetBounds()">
-        <mat-icon aria-label="Example icon-button with a heart icon">crop_free</mat-icon>
-    </button>
-</div> -->
