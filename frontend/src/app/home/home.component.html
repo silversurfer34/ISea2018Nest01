@@ -32,11 +32,11 @@
 
       <ng-container matColumnDef="launchMapView">
           <mat-header-cell *matHeaderCellDef ></mat-header-cell>
-          <mat-cell *matCellDef="let element"><a routerLink="/map/{{element.id}}"> <img src="../assets/seaMap.png" class="iconRoute" height="32" width="32"></a> </mat-cell>
+          <mat-cell *matCellDef="let element"><img src="../assets/seaMap.png" class="iconRoute" height="32" width="32"></mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" [class]="getClass(row.id)"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [class]="getClass(row.id)" (click)="goToMapView(row.id, row.name)"></mat-row>
     </mat-table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>
   

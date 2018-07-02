@@ -25,6 +25,10 @@
   /* animation-iteration-count: 5; */
 }
 
+.mat-row:hover{
+  cursor: pointer;
+}
+
 .mat-row:hover .iconRoute{
   display:block;
 }

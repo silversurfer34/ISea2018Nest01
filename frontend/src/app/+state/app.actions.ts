@@ -43,6 +43,10 @@ export interface LoadRouteDataFromDb{
   type: 'LOAD_ROUTE_DATA_FROM_DB'  
 }
 
+export interface NewRouteIncoming{
+  type: 'NEW_ROUTE_INCOMING'
+}
+
 export type AppAction = 
 AddRouteData 
 | SetSnackbarMessage
@@ -52,4 +56,5 @@ AddRouteData
 | UpdateNewItemId
 | UpdateRoutes
 | LoadRouteDataFromDb
+| NewRouteIncoming
 | Loading;

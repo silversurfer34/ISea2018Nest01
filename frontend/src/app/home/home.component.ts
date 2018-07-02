@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { RouteInfoFromDb } from '../datamodel/datamodel';
 import { Store } from '@ngrx/store';
 import { MatTableDataSource, MatPaginator, MatSort} from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private backend: BackendService,
-    private store: Store<any>
+    private store: Store<any>,
+    private router: Router
   ) {
     this.store.dispatch({
       type: 'LOAD_ROUTE_DATA_FROM_DB'
@@ -87,6 +89,14 @@ export class HomeComponent implements OnInit {
       date = d.toLocaleString(locale, { day: "2-digit", month: "long", year: "numeric" });
     }
     return date;
+  }
+
+  goToMapView(id: number, name: string){
+    this.store.dispatch({
+      type: 'APP_TITLE_SUFFIX',
+      payload: name
+    })
+    this.router.navigate(['map', id]);
   }
 }
 

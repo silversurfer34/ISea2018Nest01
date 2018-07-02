@@ -27,6 +27,7 @@ export class MapComponent implements OnInit {
   private cacheTracePoints: Point[];
 
   private newRoute: Point[] = [];
+  private mapMoved: boolean = false;
 
   private materialButtonClass = "mat-raised-button";
   private traceSelected: string = "selected";
@@ -67,7 +68,7 @@ export class MapComponent implements OnInit {
       type: 'LOAD_ROUTE_DATA_FROM_DB'
     });
     this.backend.getRouteData(this.routeId);
-    this.backend.getRouteName(this.routeId);
+    // this.backend.getRouteName(this.routeId);
   }
 
   private handleDisplayedRoute( displayedRoute: RouteDataFromDb[] ){
@@ -189,5 +190,14 @@ export class MapComponent implements OnInit {
   private dblClicked($event){
     let route = { points: this.newRoute };
     console.log(JSON.stringify(route));    
+  }
+
+  private centerChanged($event){
+    this.mapMoved = true;
+  }
+
+  private resetBounds(){
+    this.fitBounds();
+    this.mapMoved = false;
   }
 }

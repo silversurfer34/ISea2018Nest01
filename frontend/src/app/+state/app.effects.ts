@@ -14,7 +14,8 @@ export class AppEffects {
   @Effect()
   showProgressBar$ = this.actions
     .ofType(
-      'LOAD_ROUTE_DATA_FROM_DB'
+      'LOAD_ROUTE_DATA_FROM_DB',
+      'NEW_ROUTE_INCOMING'
     )
     .pipe(
       map((action) => {

@@ -38,3 +38,14 @@ agm-map {
   border: 2px solid #cc9900 !important;  
   box-shadow: unset;
 }
+
+.optionsButton{
+  display: flex;
+  position: absolute;
+  top: 76px;
+  right: 20px;
+}
+
+.mat-button-wrapper{
+  margin-top: -1px;
+}

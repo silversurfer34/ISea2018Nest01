@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core'
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { BackendService } from '../backend/backend.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-upload-route',
@@ -22,6 +23,7 @@ export class UploadRouteComponent implements OnInit {
   constructor(
     private backend: BackendService,
     public dialogRef: MatDialogRef<UploadRouteComponent>,
+    private store: Store<any>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { 
     this.routeName = new FormControl('', Validators.required);
@@ -41,7 +43,10 @@ export class UploadRouteComponent implements OnInit {
   }
 
   apply() {        
-    if(!this.isFormInvalid()){   
+    if(!this.isFormInvalid()){  
+      this.store.dispatch({
+        type: 'NEW_ROUTE_INCOMING'
+      }) 
       this.backend.addRoute(this.routeName.value, this.routeDate.value, this.routeFile, this.traceDate.value, this.traceFile);      
       this.close();
     }
