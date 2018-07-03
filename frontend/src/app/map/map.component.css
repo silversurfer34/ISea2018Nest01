@@ -9,12 +9,7 @@ agm-map {
   height: 100% !important;
 }
 
-.viewData{
-  display: flex;
-  position: absolute;
-  top: 76px;
-  left: 20px;
-}
+
 
 .routeButton.selected{
   background-color: #99cc00;    

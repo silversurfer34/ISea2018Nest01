@@ -26,9 +26,13 @@ export class MapComponent implements OnInit {
   private tracePoints: Point[];
   private cacheTracePoints: Point[];
 
+  private newRoute: Point[] = [];
+
   private materialButtonClass = "mat-raised-button";
   private traceSelected: string = "selected";
   private routeSelected: string = "selected";
+
+  private clickToogle$;
 
   private routeId: number;
   constructor(
@@ -59,6 +63,7 @@ export class MapComponent implements OnInit {
     .subscribe();
 
     this.store.select('app', 'displayedRoute').subscribe( displayedRoute => this.handleDisplayedRoute(displayedRoute));
+    this.clickToogle$ = this.store.select('app', 'clickToogle');
   }
 
   ngOnInit() {
@@ -109,7 +114,7 @@ export class MapComponent implements OnInit {
 
   getBoundsForPolygon( points: Point[] ){
     let bounds = undefined;
-    if(points){
+    if(points && points.length > 0){
       const minLatitude = points.reduce( (previous, current) => {
         return previous.latitude < current.latitude ? previous: current;
       }, {latitude: undefined, longitude: undefined});
@@ -145,14 +150,21 @@ export class MapComponent implements OnInit {
   }
 
   private showOrHideTrace(){
+    let state:boolean
     if(this.traceSelected === 'selected'){
       this.traceSelected = '';
       this.tracePoints = undefined;
+      state=true;
     }
     else{
       this.traceSelected = 'selected';
       this.tracePoints = this.cacheTracePoints;
+      state=false;
     }
+    this.store.dispatch({
+      type: 'CLICK_TOOGLE',
+      payload: state
+    })
   }
 
   private showOrHideRoute(){
@@ -182,5 +194,14 @@ export class MapComponent implements OnInit {
       title = "No info";
     }
     return title;
+  }
+
+  private clicked($event){    
+    this.newRoute.push( { latitude: $event.coords.lat, longitude: $event.coords.lng});
+  }
+
+  private dblClicked($event){
+    let route = { points: this.newRoute };
+    console.log(JSON.stringify(route));    
   }
 }

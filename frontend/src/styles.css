@@ -6,3 +6,10 @@ html, body{
     font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
     height: 100%;
 }
+
+.viewData{
+    display: flex;
+    position: absolute;
+    top: 76px;
+    left: 20px;
+  }

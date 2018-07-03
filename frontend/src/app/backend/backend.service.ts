@@ -164,4 +164,26 @@ export class BackendService {
       }
     });
   }
+
+  saveRouteCreated (routeName: string, route: RouteData) {
+    const timestamp = +new Date();
+
+  this.db.collection<RouteInfoFromDb>(this.routesInfoDb).add({
+    id: timestamp,
+    name: routeName,
+    routeDate: new Date().toString(),
+    routeFileName: "",
+    traceDate: "",
+    traceFileName: ""
+  }).catch( err => console.log(err));
+
+  const routeDataToSave: RouteDataFromDb = {
+    id: timestamp,
+    route: route,
+    trace: {points:[]}
+  }
+  this.db.collection<RouteDataFromDb>(this.routesDataDb).add(
+    routeDataToSave
+  )
+  }
 }

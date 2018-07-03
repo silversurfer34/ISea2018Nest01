@@ -73,6 +73,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  creationRoute(){
+    this.router.navigateByUrl("/routeCreation");
+  }
+
   getClass(id){
     let suffix=""
     if(id == this.newItemId){
