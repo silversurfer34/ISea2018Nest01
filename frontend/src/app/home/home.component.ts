@@ -92,10 +92,6 @@ export class HomeComponent implements OnInit {
   }
 
   goToMapView(id: number, name: string){
-    this.store.dispatch({
-      type: 'APP_TITLE_SUFFIX',
-      payload: name
-    })
     this.router.navigate(['map', id]);
   }
 }

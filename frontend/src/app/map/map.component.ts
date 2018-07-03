@@ -42,7 +42,11 @@ export class MapComponent implements OnInit {
     .map(param => {
       if (param && param.id) {
         this.routeId = +param.id;
-        this.getRouteData();
+        this.store.dispatch({
+          type: 'APP_TITLE_SUFFIX',
+          payload: 'Loading...'
+        });
+        this.getRouteData();       
       }
       else{
         this.store.dispatch({
@@ -64,8 +68,8 @@ export class MapComponent implements OnInit {
     this.store.dispatch({
       type: 'LOAD_ROUTE_DATA_FROM_DB'
     });
-    this.backend.getRouteData(this.routeId);
-    // this.backend.getRouteName(this.routeId);
+    this.backend.getRouteName(this.routeId);
+    this.backend.getRouteData(this.routeId);    
   }
 
   private handleDisplayedRoute( displayedRoute: RouteDataFromDb[] ){
