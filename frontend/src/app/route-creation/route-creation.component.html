@@ -10,6 +10,8 @@
 </agm-map>
 
 <div class="viewData">
-        <input matInput placeholder="Route name" [(ngModel)]="routeName" type="text" required>
+        <mat-form-field>
+            <input matInput placeholder="Route name" [(ngModel)]="routeName" type="text" required>
+        </mat-form-field>
         <button mat-raised-button color="primary" (click)="saveRoute()">save</button>
     </div>

@@ -7,9 +7,12 @@ html, body{
     height: 100%;
 }
 
-.viewData{
-    display: flex;
+.viewData{    
     position: absolute;
     top: 76px;
     left: 20px;
+  }
+
+  .flex{
+      display: flex;
   }
