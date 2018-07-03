@@ -30,3 +30,4 @@ export interface FileInfo{
     date: string,
     file: File
 }
+

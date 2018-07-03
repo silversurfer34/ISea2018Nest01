@@ -12,6 +12,14 @@ export function AppReducer(state: App, action: AppAction): App {
       }
     }
 
+    case 'UPDATE_TRACE_RT_DATA': {      
+      return{
+        ...state,
+        displayedTraceRT: action.payload
+      }
+    }
+
+
     case 'SET_SNACKBAR_MESSAGE': {
       return {
         ...state,

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
-import { RouteInfoFromDb, RouteDataFromDb, RouteData, FileInfo } from '../datamodel/datamodel';
+import { RouteInfoFromDb, RouteDataFromDb, RouteData, FileInfo, Point } from '../datamodel/datamodel';
 import { Store } from '@ngrx/store';
 
 @Injectable()
@@ -20,6 +20,13 @@ export class BackendService {
 
   getExistingRoutes(){        
     this.db.collection<RouteInfoFromDb>(this.routesInfoDb).valueChanges().subscribe( itemsInDb => this.handleDbContent(itemsInDb) );
+  }
+
+  getTraceRT(traceName :string){        
+    this.db.collection<Point>(traceName).valueChanges().subscribe( itemsInDb => this.store.dispatch ({
+      type :"UPDATE_TRACE_RT_DATA",
+      payload: itemsInDb
+    }) );
   }
 
   handleDbContent(itemsInDb: RouteInfoFromDb[]){

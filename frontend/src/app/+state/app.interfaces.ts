@@ -1,7 +1,8 @@
-import { RouteDataFromDb, RouteInfoFromDb } from "../datamodel/datamodel";
+import { RouteDataFromDb, RouteInfoFromDb, Point } from "../datamodel/datamodel";
 
 export interface App {
   displayedRoute: RouteDataFromDb[];
+  displayedTraceRT: Point[];
   message: string; 
   openUploadDialog: boolean;
   appSuffix: string;

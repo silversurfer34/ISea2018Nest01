@@ -25,6 +25,7 @@ export class MapComponent implements OnInit {
   private cacheRoutePoints: Point[];
   private tracePoints: Point[];
   private cacheTracePoints: Point[];
+  private traceRTPoints: Point[];
 
   private newRoute: Point[] = [];
 
@@ -64,6 +65,9 @@ export class MapComponent implements OnInit {
 
     this.store.select('app', 'displayedRoute').subscribe( displayedRoute => this.handleDisplayedRoute(displayedRoute));
     this.clickToogle$ = this.store.select('app', 'clickToogle');
+
+    this.backend.getTraceRT("mptc_tour");
+    this.store.select('app', 'displayedTraceRT').subscribe( displayedTraceRT => this.handleDisplayedTraceRT(displayedTraceRT));
   }
 
   ngOnInit() {
@@ -75,6 +79,10 @@ export class MapComponent implements OnInit {
     });
     this.backend.getRouteName(this.routeId);
     this.backend.getRouteData(this.routeId);    
+  }
+
+  private handleDisplayedTraceRT( displayedTraceRT: Point[] ){
+    this.traceRTPoints = displayedTraceRT;
   }
 
   private handleDisplayedRoute( displayedRoute: RouteDataFromDb[] ){

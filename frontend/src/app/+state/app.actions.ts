@@ -1,8 +1,13 @@
-import { RouteDataFromDb, RouteInfoFromDb } from "../datamodel/datamodel";
+import { RouteDataFromDb, RouteInfoFromDb,TraceRTDataFromDb } from "../datamodel/datamodel";
 
 export interface AddRouteData {
   type: 'ADD_ROUTE_DATA';
   payload: RouteDataFromDb;
+}
+
+export interface UpdateTraceRTData {
+  type: 'UPDATE_TRACE_RT_DATA';
+  payload: TraceRTDataFromDb;
 }
 
 export interface SetSnackbarMessage {
@@ -49,6 +54,7 @@ export interface NewRouteIncoming{
 
 export type AppAction = 
 AddRouteData 
+| UpdateTraceRTData
 | SetSnackbarMessage
 | ClearSnackbarMessage
 | OpenUploadDialog
