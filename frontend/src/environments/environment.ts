@@ -6,11 +6,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyAmOplawyoQFVDrLOlqeuKBC2jOvE93y4w",
-    authDomain: "isea-backend.firebaseapp.com",
-    databaseURL: "https://isea-backend.firebaseio.com",
-    projectId: "isea-backend",
-    storageBucket: "isea-backend.appspot.com",
-    messagingSenderId: "612414629150"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: ""
   }
 }; 
