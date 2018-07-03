@@ -172,7 +172,7 @@ export class BackendService {
     id: timestamp,
     name: routeName,
     routeDate: new Date().toString(),
-    routeFileName: "",
+    routeFileName: "dummyName",
     traceDate: "",
     traceFileName: ""
   }).catch( err => console.log(err));

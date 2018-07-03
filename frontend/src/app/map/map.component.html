@@ -20,6 +20,6 @@
 </agm-map>
 
 <div class="viewData">
-  <button mat-raised-button *ngIf="cacheRoutePoints !== undefined" class="routeButton {{materialButtonClass}} {{routeSelected}}" (click)="showOrHideRoute()">route</button>
-  <button mat-raised-button *ngIf="cacheTracePoints !== undefined" class="traceButton {{materialButtonClass}} {{traceSelected}}" (click)="showOrHideTrace()">trace</button>
+  <button mat-raised-button *ngIf="cacheRoutePoints !== undefined&&cacheRoutePoints.length>0" class="routeButton {{materialButtonClass}} {{routeSelected}}" (click)="showOrHideRoute()">route</button>
+  <button mat-raised-button *ngIf="cacheTracePoints !== undefined&&cacheTracePoints.length>0" class="traceButton {{materialButtonClass}} {{traceSelected}}" (click)="showOrHideTrace()">trace</button>
 </div>
