@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
 import { BoatTrajectoriesFromDb, FileInfo, Point } from '../datamodel/datamodel';
@@ -10,22 +10,32 @@ export class BackendService {
 
   private readonly boatTrajectoriesDb: string = 'boatTrajectories';
 
+  private trajectoriesDB: AngularFirestoreCollection<BoatTrajectoriesFromDb>;
   private knownTrajectoryNames: string[] = [];
   constructor(
     private db: AngularFirestore,
     private storage: AngularFireStorage,
     private store: Store<any>
-  ) { }
-
-  getExistingRoutes(){        
-    this.db.collection<BoatTrajectoriesFromDb>(this.boatTrajectoriesDb).valueChanges().subscribe( itemsInDb => this.handleDbContent(itemsInDb) );
+  ) { 
+    this.trajectoriesDB = this.db.collection<BoatTrajectoriesFromDb>(this.boatTrajectoriesDb);
   }
 
-  getTraceRT(traceName :string){        
-    this.db.collection<Point>(traceName).valueChanges().subscribe( itemsInDb => this.store.dispatch ({
-      type :"UPDATE_TRACE_RT_DATA",
-      payload: itemsInDb
-    }) );
+  getExistingRoutes(){        
+    this.trajectoriesDB.valueChanges().subscribe( itemsInDb => this.handleDbContent(itemsInDb) );
+  }
+
+  getTraceRT(traceName :string){    
+    let me = this;    
+    this.db.collection<Point>(traceName).valueChanges().subscribe( itemsInDb => {
+      if(itemsInDb && itemsInDb.length > 0){
+        me.trajectoriesDB.ref.where('name', '==', traceName ).get().then( res => res.forEach(function(doc) {
+          me.trajectoriesDB.doc(doc.id).set(
+            {trace: itemsInDb, traceDate: new Date().toString()},
+            {merge: true}
+          );
+        })).catch(err => console.log(err));
+      }
+    });      
   }
 
   handleDbContent(itemsInDb: BoatTrajectoriesFromDb[]){
@@ -58,7 +68,7 @@ export class BackendService {
 
   getTrajectoryData(trajectoryName: string){    
     let me = this;
-    this.db.collection<BoatTrajectoriesFromDb>(this.boatTrajectoriesDb).ref.where('name', '==', trajectoryName ).get().then( res => res.forEach(function(doc) {
+    this.trajectoriesDB.ref.where('name', '==', trajectoryName ).get().then( res => res.forEach(function(doc) {
       // doc.data() is never undefined for query doc snapshots
       let result = doc.data() as BoatTrajectoriesFromDb;         
       me.store.dispatch({
@@ -99,7 +109,7 @@ export class BackendService {
             route: content[0],
             trace: content[1]
           }
-          me.db.collection<BoatTrajectoriesFromDb>(me.boatTrajectoriesDb).add(
+          me.trajectoriesDB.add(
             trajectoryDataToSave
           )
           .then( value =>  { me.store.dispatch({
@@ -139,15 +149,14 @@ export class BackendService {
     readFile(0, [{}, {}], false); 
   }
 
-  saveRouteCreated (routeName: string, route: Point[]) {
-  
-  this.db.collection<BoatTrajectoriesFromDb>(this.boatTrajectoriesDb).add({
-    name: routeName,
-    routeDate: new Date().toString(),
-    traceDate: "",
-    route: route,
-    trace: []
-  
-  }).catch( err => console.log(err));
+  saveRouteCreated (routeName: string, route: Point[]) {  
+    this.trajectoriesDB.add({
+      name: routeName,
+      routeDate: new Date().toString(),
+      traceDate: "",
+      route: route,
+      trace: []
+    
+    }).catch( err => console.log(err));
   }
 }
