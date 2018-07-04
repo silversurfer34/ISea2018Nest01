@@ -1,8 +1,7 @@
 import { BoatTrajectoriesFromDb, Point } from "../datamodel/datamodel";
 
 export interface App {
-  displayedTrajectory: BoatTrajectoriesFromDb;
-  displayedTraceRT: Point[];
+  trajectoryName: string;
   message: string; 
   openUploadDialog: boolean;
   appSuffix: string;

@@ -1,8 +1,7 @@
 import { App } from './app.interfaces';
 
 export const AppInitialState: App = {
-  displayedTrajectory: undefined,
-  displayedTraceRT: undefined,
+  trajectoryName: "",
   message: "",
   openUploadDialog: false,
   appSuffix: "",

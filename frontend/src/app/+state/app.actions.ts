@@ -1,13 +1,8 @@
 import { BoatTrajectoriesFromDb, Point} from "../datamodel/datamodel";
 
-export interface AddRouteData {
-  type: 'ADD_ROUTE_DATA';
-  payload: BoatTrajectoriesFromDb;
-}
-
-export interface UpdateTraceRTData {
-  type: 'UPDATE_TRACE_RT_DATA';
-  payload: Point[];
+export interface SetTrajectoryName {
+  type: 'SET_TRAJECTORY_NAME';
+  payload: string;
 }
 
 export interface SetSnackbarMessage {
@@ -53,8 +48,7 @@ export interface NewRouteIncoming{
 }
 
 export type AppAction = 
-AddRouteData 
-| UpdateTraceRTData
+SetTrajectoryName
 | SetSnackbarMessage
 | ClearSnackbarMessage
 | OpenUploadDialog

@@ -51,6 +51,10 @@ export class MapComponent implements OnInit {
           type: 'APP_TITLE_SUFFIX',
           payload: this.trajectoryName
         });
+        this.store.dispatch({
+          type: 'SET_TRAJECTORY_NAME',
+          payload: this.trajectoryName
+        });
         this.getTrajectoryData();       
       }
       else{
@@ -77,7 +81,6 @@ export class MapComponent implements OnInit {
     this.store.dispatch({
       type: 'LOAD_ROUTE_DATA_FROM_DB'
     });
-    this.backend.getTrajectoryData(this.trajectoryName);    
   }
 
   private handleDisplayedTraceRT( displayedTraceRT: Point[] ){

@@ -31,5 +31,6 @@ export class RouteCreationComponent implements OnInit {
 
   saveRoute(){
     this.backend.saveRouteCreated(this.routeName, this.route);
+    //redirect
   }
 }

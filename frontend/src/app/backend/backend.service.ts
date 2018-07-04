@@ -34,10 +34,6 @@ export class BackendService {
             {merge: true}
           );
         })).catch(err => console.log(err));
-        this.store.dispatch({
-          type: 'UPDATE_TRACE_RT_DATA',
-          payload: itemsInDb
-        })
       }
     });      
   }
@@ -70,19 +66,7 @@ export class BackendService {
     this.knownTrajectoryNames = currentNames;
   }
 
-  getTrajectoryData(trajectoryName: string){    
-    let me = this;
-    this.trajectoriesDB.ref.where('name', '==', trajectoryName ).get().then( res => res.forEach(function(doc) {
-      // doc.data() is never undefined for query doc snapshots
-      let result = doc.data() as BoatTrajectoriesFromDb;         
-      me.store.dispatch({
-        type: 'ADD_ROUTE_DATA',
-        payload: result
-      })      
-    })).catch(err => console.log(err));    
-  }
-
-  addTrajectory(name: string, routeDate: string, routeFile: File, traceDate: string, traceFile: File){
+   addTrajectory(name: string, routeDate: string, routeFile: File, traceDate: string, traceFile: File){
 
     let filesInfo: FileInfo[] = [ 
       {name: routeFile? routeFile.name : '', date: routeDate || new Date().toString(), file: routeFile},

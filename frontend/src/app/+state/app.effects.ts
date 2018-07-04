@@ -30,7 +30,6 @@ export class AppEffects {
   hideProgressBar$ = this.actions
     .ofType(
       'SET_SNACKBAR_MESSAGE',
-      'ADD_ROUTE_DATA',
       'UPDATE_ROUTES'      
     )
     .pipe(

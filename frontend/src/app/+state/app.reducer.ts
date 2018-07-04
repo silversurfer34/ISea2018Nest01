@@ -5,17 +5,11 @@ import { AppAction } from './app.actions';
 export function AppReducer(state: App, action: AppAction): App {
 
   switch (action.type) {
-    case 'ADD_ROUTE_DATA': {      
-      return{
-        ...state,
-        displayedTrajectory: action.payload
-      }
-    }
 
-    case 'UPDATE_TRACE_RT_DATA': {      
+    case 'SET_TRAJECTORY_NAME': {      
       return{
         ...state,
-        displayedTrajectory: {...state.displayedTrajectory, trace: action.payload}
+        trajectoryName: action.payload
       }
     }
 
