@@ -2,16 +2,15 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
-import { RouteInfoFromDb, RouteDataFromDb, RouteData, FileInfo, Point } from '../datamodel/datamodel';
+import { BoatTrajectoriesFromDb, FileInfo, Point } from '../datamodel/datamodel';
 import { Store } from '@ngrx/store';
 
 @Injectable()
 export class BackendService {
 
-  private readonly routesInfoDb: string = 'routesInfo';
-  private readonly routesDataDb: string = 'routesData';  
+  private readonly boatTrajectoriesDb: string = 'boatTrajectories';
 
-  private knownRouteIds: number[] = [];
+  private knownTrajectoryNames: string[] = [];
   constructor(
     private db: AngularFirestore,
     private storage: AngularFireStorage,
@@ -19,7 +18,7 @@ export class BackendService {
   ) { }
 
   getExistingRoutes(){        
-    this.db.collection<RouteInfoFromDb>(this.routesInfoDb).valueChanges().subscribe( itemsInDb => this.handleDbContent(itemsInDb) );
+    this.db.collection<BoatTrajectoriesFromDb>(this.boatTrajectoriesDb).valueChanges().subscribe( itemsInDb => this.handleDbContent(itemsInDb) );
   }
 
   getTraceRT(traceName :string){        
@@ -29,20 +28,20 @@ export class BackendService {
     }) );
   }
 
-  handleDbContent(itemsInDb: RouteInfoFromDb[]){
-    const currentIds = itemsInDb.map( item => item.id );
+  handleDbContent(itemsInDb: BoatTrajectoriesFromDb[]){
+    const currentNames = itemsInDb.map( item => item.name);
     // we have already at least one route and we have a new one
-    if(this.knownRouteIds.length > 0 && this.knownRouteIds.length < currentIds.length){
-      const newIds = currentIds.filter( id => this.knownRouteIds.indexOf(id) < 0);
-      if(newIds.length > 0){
+    if(this.knownTrajectoryNames.length > 0 && this.knownTrajectoryNames.length < currentNames.length){
+      const newNames = currentNames.filter( name => this.knownTrajectoryNames.indexOf(name) < 0);
+      if(newNames.length > 0){
         this.store.dispatch({
-          type: 'UPDATE_NEW_ITEM_ID',
-          payload: newIds[0]
+          type: 'UPDATE_NEW_ITEM_NAME',
+          payload: newNames[0]
         })
 
         setTimeout( () => {
           this.store.dispatch({
-            type: 'UPDATE_NEW_ITEM_ID',
+            type: 'UPDATE_NEW_ITEM_NAME',
             payload: -1
           })
         }, 2500);
@@ -54,26 +53,14 @@ export class BackendService {
       payload: itemsInDb
     })
 
-    this.knownRouteIds = currentIds;
+    this.knownTrajectoryNames = currentNames;
   }
 
-  getRouteName(routeId: number){
+  getTrajectoryData(trajectoryName: string){    
     let me = this;
-    this.db.collection<RouteInfoFromDb>(this.routesInfoDb).ref.where('id', '==', routeId ).get().then( res => res.forEach(function(doc) {
+    this.db.collection<BoatTrajectoriesFromDb>(this.boatTrajectoriesDb).ref.where('name', '==', trajectoryName ).get().then( res => res.forEach(function(doc) {
       // doc.data() is never undefined for query doc snapshots
-      let result = doc.data() as RouteInfoFromDb;         
-      me.store.dispatch({
-        type: 'APP_TITLE_SUFFIX',
-        payload: result.name
-      })      
-    })).catch(err => console.log(err));    
-  }
-
-  getRouteData(routeId: number){    
-    let me = this;
-    this.db.collection<RouteDataFromDb>(this.routesDataDb).ref.where('id', '==', routeId ).get().then( res => res.forEach(function(doc) {
-      // doc.data() is never undefined for query doc snapshots
-      let result = doc.data() as RouteDataFromDb;         
+      let result = doc.data() as BoatTrajectoriesFromDb;         
       me.store.dispatch({
         type: 'ADD_ROUTE_DATA',
         payload: result
@@ -81,16 +68,15 @@ export class BackendService {
     })).catch(err => console.log(err));    
   }
 
-  addRoute(name: string, routeDate: string, routeFile: File, traceDate: string, traceFile: File){
-    const timestamp = +new Date();
+  addTrajectory(name: string, routeDate: string, routeFile: File, traceDate: string, traceFile: File){
 
     let filesInfo: FileInfo[] = [ 
-      {name: routeFile? timestamp.toString() + '-' + routeFile.name : '', date: routeDate || new Date().toString(), file: routeFile},
-      {name: traceFile? timestamp.toString() + '-' + traceFile.name: '', date: traceDate || new Date().toString(), file: traceFile}
+      {name: routeFile? routeFile.name : '', date: routeDate || new Date().toString(), file: routeFile},
+      {name: traceFile? traceFile.name: '', date: traceDate || new Date().toString(), file: traceFile}
     ]   
     
     if(routeFile || traceFile){
-      this.loadAndSaveRouteData(name, filesInfo, timestamp);
+      this.loadAndSaveRouteData(name, filesInfo);
     }
     else{
       this.store.dispatch({
@@ -98,38 +84,28 @@ export class BackendService {
         payload: 'Nothing to save'
       })
     }
-  }  
-
-  saveRouteInfo(name: string, filesInfo: FileInfo[], timestamp: number){    
-    this.db.collection<RouteInfoFromDb>(this.routesInfoDb).add({
-      id: timestamp,
-      name: name,
-      routeDate: filesInfo[0].date,
-      routeFileName: filesInfo[0].name,
-      traceDate: filesInfo[1].date,
-      traceFileName: filesInfo[1].name
-    }).catch( err => console.log(err));
   }
 
-  loadAndSaveRouteData(name: string, info: FileInfo[], timestamp: number){
+  loadAndSaveRouteData(name: string, info: FileInfo[]){
     var reader = new FileReader(); 
     let me = this;    
     function readFile(index, content, error) {      
       if( index >= info.length){
         if( !error ){    
-          const routeDataToSave: RouteDataFromDb = {
-            id: timestamp,
+          const trajectoryDataToSave: BoatTrajectoriesFromDb = {
+            name: name,
+            routeDate: info[0].date,
+            traceDate: info[1].date,
             route: content[0],
             trace: content[1]
           }
-          me.db.collection<RouteDataFromDb>(me.routesDataDb).add(
-            routeDataToSave
+          me.db.collection<BoatTrajectoriesFromDb>(me.boatTrajectoriesDb).add(
+            trajectoryDataToSave
           )
           .then( value =>  { me.store.dispatch({
                 type: 'SET_SNACKBAR_MESSAGE',
-                payload: 'Route saved'
-              });
-              me.saveRouteInfo(name, info, timestamp);  
+                payload: 'Trajectory saved'
+              }); 
             }
           )
           .catch( err => console.log(err)); 
@@ -163,34 +139,15 @@ export class BackendService {
     readFile(0, [{}, {}], false); 
   }
 
-  saveFile(filesInfo: FileInfo[], timestamp: number){
-    filesInfo.forEach( fileInfo => {      
-      if(fileInfo.file){        
-        this.storage.upload(fileInfo.name, fileInfo.file )
-        .catch( error => console.log("error"));
-      }
-    });
-  }
-
-  saveRouteCreated (routeName: string, route: RouteData) {
-    const timestamp = +new Date();
-
-  this.db.collection<RouteInfoFromDb>(this.routesInfoDb).add({
-    id: timestamp,
+  saveRouteCreated (routeName: string, route: Point[]) {
+  
+  this.db.collection<BoatTrajectoriesFromDb>(this.boatTrajectoriesDb).add({
     name: routeName,
     routeDate: new Date().toString(),
-    routeFileName: "dummyName",
     traceDate: "",
-    traceFileName: ""
-  }).catch( err => console.log(err));
-
-  const routeDataToSave: RouteDataFromDb = {
-    id: timestamp,
     route: route,
-    trace: {points:[]}
-  }
-  this.db.collection<RouteDataFromDb>(this.routesDataDb).add(
-    routeDataToSave
-  )
+    trace: []
+  
+  }).catch( err => console.log(err));
   }
 }

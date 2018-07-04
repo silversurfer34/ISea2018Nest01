@@ -49,7 +49,7 @@ import { RouteCreationComponent } from './route-creation/route-creation.componen
     FormsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAmOplawyoQFVDrLOlqeuKBC2jOvE93y4w'
+      apiKey: 'AIzaSyBU2GjyIqw3fTy7e8cGV0O9zPOAnh4-XFk'
     })
   ],
   providers: [BackendService],

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../backend/backend.service';
-import { RouteDataFromDb, Point } from '../datamodel/datamodel';
+import { Point, BoatTrajectoriesFromDb } from '../datamodel/datamodel';
 import { Observable } from 'rxjs/observable';
 
 @Component({
@@ -13,8 +13,8 @@ import { Observable } from 'rxjs/observable';
 })
 export class MapComponent implements OnInit {
   
-  lat: number = 43.6109200;
-  lng: number = 3.8772300;
+  latitude: number = 43.6109200;
+  longitude: number = 3.8772300;
   private globalBounds;
   private routeBounds;
   private traceBounds;
@@ -35,7 +35,7 @@ export class MapComponent implements OnInit {
 
   private clickToogle$;
 
-  private routeId: number;
+  private trajectoryName: string;
   constructor(
     private store: Store<any>,
     private activatedRoute: ActivatedRoute,
@@ -45,13 +45,13 @@ export class MapComponent implements OnInit {
     this.clearData(); 
     this.activatedRoute.params
     .map(param => {
-      if (param && param.id) {
-        this.routeId = +param.id;
+      if (param && param.name) {
+        this.trajectoryName = param.name;
         this.store.dispatch({
           type: 'APP_TITLE_SUFFIX',
-          payload: 'Loading...'
+          payload: this.trajectoryName
         });
-        this.getRouteData();       
+        this.getTrajectoryData();       
       }
       else{
         this.store.dispatch({
@@ -63,37 +63,36 @@ export class MapComponent implements OnInit {
     })
     .subscribe();
 
-    this.store.select('app', 'displayedRoute').subscribe( displayedRoute => this.handleDisplayedRoute(displayedRoute));
+    this.store.select('app', 'displayedTrajectory').subscribe( displayedRoute => this.handleDisplayedTrajectory(displayedRoute));
     this.clickToogle$ = this.store.select('app', 'clickToogle');
 
-    this.backend.getTraceRT("mptc_tour");
+    this.backend.getTraceRT(this.trajectoryName);
     this.store.select('app', 'displayedTraceRT').subscribe( displayedTraceRT => this.handleDisplayedTraceRT(displayedTraceRT));
   }
 
   ngOnInit() {
   }
 
-  private getRouteData(){
+  private getTrajectoryData(){
     this.store.dispatch({
       type: 'LOAD_ROUTE_DATA_FROM_DB'
     });
-    this.backend.getRouteName(this.routeId);
-    this.backend.getRouteData(this.routeId);    
+    this.backend.getTrajectoryData(this.trajectoryName);    
   }
 
   private handleDisplayedTraceRT( displayedTraceRT: Point[] ){
     this.traceRTPoints = displayedTraceRT;
   }
 
-  private handleDisplayedRoute( displayedRoute: RouteDataFromDb[] ){
+  private handleDisplayedTrajectory( displayedTrajectory: BoatTrajectoriesFromDb ){
     this.clearData();
-    if(displayedRoute.length > 0){
-      if(displayedRoute[0].route.points){
-        this.routePoints = displayedRoute[0].route.points;
+    if(displayedTrajectory){
+      if(displayedTrajectory.route){
+        this.routePoints = displayedTrajectory.route;
         this.cacheRoutePoints = this.routePoints;    
       }
-      if(displayedRoute[0].trace.points){
-        this.tracePoints = displayedRoute[0].trace.points;  
+      if(displayedTrajectory.trace){
+        this.tracePoints = displayedTrajectory.trace;  
         this.cacheTracePoints = this.tracePoints;      
       }
       this.fitBounds();
@@ -194,9 +193,9 @@ export class MapComponent implements OnInit {
     if(point.speed){
       title += 'Speed: ' + point.speed + "knots \n";
     }
-    if(point.time){
-      const d = new Date(point.time);
-      title += 'Time: ' + d.toLocaleString();
+    if(point.GMT_TIME){
+      const d = new Date(point.GMT_TIME);
+      title += 'GMT_TIME: ' + d.toLocaleString();
     }
     if(!title){
       title = "No info";

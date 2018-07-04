@@ -10,13 +10,13 @@
       <!-- route exist -->
       <ng-container matColumnDef="route">
         <mat-header-cell *matHeaderCellDef>Route</mat-header-cell>
-        <mat-cell *matCellDef="let element">  <img [src]="onDisplayIcon(element.routeFileName, '../assets/checkmark-16.png')" class="iconCheck"></mat-cell>
+        <mat-cell *matCellDef="let element">  <img [src]="onDisplayIcon(element.route, '../assets/checkmark-16.png')" class="iconCheck"></mat-cell>
       </ng-container>
 
       <!-- trace done -->
       <ng-container matColumnDef="trace">
         <mat-header-cell *matHeaderCellDef>Trace</mat-header-cell>
-        <mat-cell *matCellDef="let element"> <img [src]="onDisplayIcon(element.traceFileName, '../assets/checkmark-16.png')" class="iconCheck"> </mat-cell>
+        <mat-cell *matCellDef="let element"> <img [src]="onDisplayIcon(element.trace, '../assets/checkmark-16.png')" class="iconCheck"> </mat-cell>
       </ng-container>
 
       <!-- route name -->
@@ -37,7 +37,7 @@
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" [class]="getClass(row.id)" (click)="goToMapView(row.id, row.name)"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [class]="getClass(row.name)" (click)="goToMapView(row.name)"></mat-row>
     </mat-table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>
   

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { RouteData, Point } from '../datamodel/datamodel';
+import { Point } from '../datamodel/datamodel';
 import { BackendService } from '../backend/backend.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { BackendService } from '../backend/backend.service';
 })
 export class RouteCreationComponent implements OnInit {
 
-  route: RouteData = {points:[]};
+  route: Point[] = [];
   routeName : string = "Route name";
 
   constructor(
@@ -26,7 +26,7 @@ export class RouteCreationComponent implements OnInit {
   }
 
   addMarker($event) {
-    this.route.points.push({latitude:$event.coords.lat, longitude:$event.coords.lng});
+    this.route.push({latitude:$event.coords.lat, longitude:$event.coords.lng});
   }
 
   saveRoute(){

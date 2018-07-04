@@ -47,7 +47,7 @@ export class UploadRouteComponent implements OnInit {
       this.store.dispatch({
         type: 'NEW_ROUTE_INCOMING'
       }) 
-      this.backend.addRoute(this.routeName.value, this.routeDate.value, this.routeFile, this.traceDate.value, this.traceFile);      
+      this.backend.addTrajectory(this.routeName.value, this.routeDate.value, this.routeFile, this.traceDate.value, this.traceFile);      
       this.close();
     }
   }

@@ -1,13 +1,13 @@
-import { RouteDataFromDb, RouteInfoFromDb,TraceRTDataFromDb } from "../datamodel/datamodel";
+import { BoatTrajectoriesFromDb, Point} from "../datamodel/datamodel";
 
 export interface AddRouteData {
   type: 'ADD_ROUTE_DATA';
-  payload: RouteDataFromDb;
+  payload: BoatTrajectoriesFromDb;
 }
 
 export interface UpdateTraceRTData {
   type: 'UPDATE_TRACE_RT_DATA';
-  payload: TraceRTDataFromDb;
+  payload: Point[];
 }
 
 export interface SetSnackbarMessage {
@@ -29,14 +29,14 @@ export interface AppTitleSuffix {
   payload: string;
 }
 
-export interface UpdateNewItemId {
-  type: 'UPDATE_NEW_ITEM_ID',
-  payload: number;
+export interface UpdateNewItemName {
+  type: 'UPDATE_NEW_ITEM_NAME',
+  payload: string;
 }
 
 export interface UpdateRoutes {
   type: 'UPDATE_ROUTES',
-  payload: RouteInfoFromDb[];
+  payload: BoatTrajectoriesFromDb[];
 }
 
 export interface Loading{
@@ -44,7 +44,7 @@ export interface Loading{
   payload: boolean;
 }
 
-export interface LoadRouteDataFromDb{
+export interface LoadBoatTrajectoriesFromDb{
   type: 'LOAD_ROUTE_DATA_FROM_DB'  
 }
 
@@ -59,8 +59,8 @@ AddRouteData
 | ClearSnackbarMessage
 | OpenUploadDialog
 | AppTitleSuffix
-| UpdateNewItemId
+| UpdateNewItemName
 | UpdateRoutes
-| LoadRouteDataFromDb
+| LoadBoatTrajectoriesFromDb
 | NewRouteIncoming
 | Loading;

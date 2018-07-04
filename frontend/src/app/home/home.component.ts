@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BackendService } from '../backend/backend.service';
 import { Observable } from 'rxjs/Observable';
-import { RouteInfoFromDb } from '../datamodel/datamodel';
+import { BoatTrajectoriesFromDb, Point } from '../datamodel/datamodel';
 import { Store } from '@ngrx/store';
 import { MatTableDataSource, MatPaginator, MatSort} from '@angular/material';
 import { Router } from '@angular/router';
@@ -13,11 +13,11 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  ELEMENT_DATA: RouteInfoFromDb[] =[];
+  ELEMENT_DATA: BoatTrajectoriesFromDb[] =[];
   displayedColumns = ['route', 'trace', 'name', 'date', 'launchMapView'];
-  dataSource: MatTableDataSource<RouteInfoFromDb>;
+  dataSource: MatTableDataSource<BoatTrajectoriesFromDb>;
 
-  newItemId: number;
+  newItemName: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -30,8 +30,8 @@ export class HomeComponent implements OnInit {
       type: 'LOAD_ROUTE_DATA_FROM_DB'
     })
     this.backend.getExistingRoutes();//.subscribe( changed => this.fillDataSource(changed));
-    this.store.select('app', 'newItemId').subscribe( newItemId => this.newItemId = newItemId);
-    this.store.select('app', 'routesInfoFromDb').subscribe( routes => this.fillDataSource(routes));
+    this.store.select('app', 'newItemName').subscribe( newItemName => this.newItemName = newItemName);
+    this.store.select('app', 'trajectoriesFromDb').subscribe( routes => this.fillDataSource(routes));
   }
 
   /**
@@ -52,18 +52,18 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  private fillDataSource(changed:RouteInfoFromDb[]) {
+  private fillDataSource(changed:BoatTrajectoriesFromDb[]) {
     this.ELEMENT_DATA=changed;
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  onDisplayIcon(fileName, imgSrc) {
-    if (fileName == "")
-      return '../assets/empty.png'
+  onDisplayIcon(data: Point[], imgSrc) {
+    if (data && data.length > 0)
+      return imgSrc 
     else
-      return imgSrc
+      return '../assets/empty.png'
   }
 
   openUploadDialog(){
@@ -77,17 +77,17 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl("/routeCreation");
   }
 
-  getClass(id){
+  getClass(name : string){
     let suffix=""
-    if(id == this.newItemId){
+    if(name == this.newItemName){
       suffix=" newItemAdded"
     }
     return 'mat-row' + suffix;
   }
 
-  getTraceDate(element: RouteInfoFromDb){
+  getTraceDate(element: BoatTrajectoriesFromDb){
     let date = " - ";
-    if(element.traceFileName){
+    if(element.trace && element.trace.length > 0){
       let d = new Date(element.traceDate);
       let locale = "en-us";
       date = d.toLocaleString(locale, { day: "2-digit", month: "long", year: "numeric" });
@@ -95,8 +95,8 @@ export class HomeComponent implements OnInit {
     return date;
   }
 
-  goToMapView(id: number, name: string){
-    this.router.navigate(['map', id]);
+  goToMapView(name: string){
+    this.router.navigate(['map', name]);
   }
 }
 

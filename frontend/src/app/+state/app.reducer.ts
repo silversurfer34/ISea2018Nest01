@@ -8,7 +8,7 @@ export function AppReducer(state: App, action: AppAction): App {
     case 'ADD_ROUTE_DATA': {      
       return{
         ...state,
-        displayedRoute: [action.payload]
+        displayedTrajectory: action.payload
       }
     }
 
@@ -48,17 +48,17 @@ export function AppReducer(state: App, action: AppAction): App {
       }
     }
 
-    case 'UPDATE_NEW_ITEM_ID': {
+    case 'UPDATE_NEW_ITEM_NAME': {
       return{
         ...state,
-        newItemId: action.payload
+        newItemName: action.payload
       }
     }
 
     case 'UPDATE_ROUTES': {
       return{
         ...state,
-        routesInfoFromDb: action.payload
+        trajectoriesFromDb: action.payload
       }
     }
 
