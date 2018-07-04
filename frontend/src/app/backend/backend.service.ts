@@ -34,6 +34,10 @@ export class BackendService {
             {merge: true}
           );
         })).catch(err => console.log(err));
+        this.store.dispatch({
+          type: 'UPDATE_TRACE_RT_DATA',
+          payload: itemsInDb
+        })
       }
     });      
   }

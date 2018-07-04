@@ -15,7 +15,7 @@ export function AppReducer(state: App, action: AppAction): App {
     case 'UPDATE_TRACE_RT_DATA': {      
       return{
         ...state,
-        displayedTraceRT: action.payload
+        displayedTrajectory: {...state.displayedTrajectory, trace: action.payload}
       }
     }
 
