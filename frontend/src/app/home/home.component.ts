@@ -15,7 +15,7 @@ import { trajectories } from '../+state/app.reducer';
 export class HomeComponent implements OnInit {
 
   ELEMENT_DATA: BoatTrajectoriesFromDb[] =[];
-  displayedColumns = ['route', 'trace', 'name', 'date', 'launchMapView'];
+  displayedColumns = ['route', 'trace', 'name', 'date', 'deleteTrajectory'];
   dataSource: MatTableDataSource<BoatTrajectoriesFromDb>;
 
   newItemName: string;
@@ -29,6 +29,10 @@ export class HomeComponent implements OnInit {
   ) {
     this.store.dispatch({
       type: 'LOAD_ROUTE_DATA_FROM_DB'
+    })
+    this.store.dispatch({
+      type: 'SET_TRAJECTORY_NAME',
+      payload: ""
     })
     this.backend.getExistingRoutes();//.subscribe( changed => this.fillDataSource(changed));
     this.store.select('app', 'newItemName').subscribe( newItemName => this.newItemName = newItemName);
@@ -98,6 +102,12 @@ export class HomeComponent implements OnInit {
 
   goToMapView(name: string){
     this.router.navigate(['map', name]);
+  }
+
+
+  deleteTrajectory (name:string)
+  {
+    this.backend.deleteTrajectory(name);
   }
 }
 

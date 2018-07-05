@@ -22,7 +22,7 @@ export class MapComponent implements OnInit {
 
   private routeColor = "#99cc00";
   private traceColor = "#cc9900";
-  private routePoints: Point[];
+  private routePoints: Point[] = [];
   private cacheRoutePoints: Point[];
   private tracePoints: Point[];
   private cacheTracePoints: Point[];
@@ -32,10 +32,13 @@ export class MapComponent implements OnInit {
   private materialButtonClass = "mat-raised-button";
   private traceSelected: string = "selected";
   private routeSelected: string = "selected";
+  private routeEdited:boolean = false;
 
   private clickToogle$;
 
-  private trajectoryName: string;
+  private routeName: string = "";
+
+  private trajectoryName: string = "";
   constructor(
     private store: Store<any>,
     private activatedRoute: ActivatedRoute,
@@ -58,10 +61,9 @@ export class MapComponent implements OnInit {
       }
       else{
         this.store.dispatch({
-          type: "SET_SNACKBAR_MESSAGE",
-          payload: 'Missing route information'
+          type: 'APP_TITLE_SUFFIX',
+          payload: "Route creation"
         });
-        // this.router.navigateByUrl('/home');
       }      
     })
     .subscribe();
@@ -69,7 +71,10 @@ export class MapComponent implements OnInit {
     this.store.select(findAtrajectory).subscribe(displayedRoute => this.handleDisplayedTrajectory(displayedRoute));
     this.clickToogle$ = this.store.select('app', 'clickToogle');
 
-    this.backend.getTraceRT(this.trajectoryName);
+    this.backend.getExistingRoutes();
+
+    if (this.trajectoryName)
+      this.backend.getTraceRT(this.trajectoryName);
   }
 
   ngOnInit() {
@@ -141,7 +146,7 @@ export class MapComponent implements OnInit {
     this.globalBounds = undefined;
     this.routeBounds = undefined;
     this.traceBounds = undefined;
-    this.routePoints = undefined;
+    this.routePoints = [];
     this.tracePoints = undefined;
     this.cacheRoutePoints = undefined;
     this.cacheTracePoints = undefined;
@@ -194,12 +199,17 @@ export class MapComponent implements OnInit {
     return title;
   }
 
-  private clicked($event){    
-    this.newRoute.push( { latitude: $event.coords.lat, longitude: $event.coords.lng});
+  addMarker($event) {
+    this.routePoints.push({latitude:$event.coords.lat, longitude:$event.coords.lng});
+    this.routeEdited = true;
   }
 
-  private dblClicked($event){
-    let route = { points: this.newRoute };
-    console.log(JSON.stringify(route));    
+  saveRoute(){
+    this.trajectoryName = this.routeName;
+    this.cacheRoutePoints = this.routePoints;
+    this.backend.saveRouteCreated(this.trajectoryName, this.routePoints);
+    this.routeEdited = false;
+    this.router.navigateByUrl(`/map/${this.trajectoryName}`);
   }
 }
+

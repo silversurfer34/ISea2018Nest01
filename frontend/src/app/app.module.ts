@@ -23,7 +23,6 @@ import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { StyledMapDirective } from './map/styled-map.directive';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
-import { RouteCreationComponent } from './route-creation/route-creation.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +31,7 @@ import { RouteCreationComponent } from './route-creation/route-creation.componen
     UploadRouteComponent,
     MapComponent,
     StyledMapDirective,
-    ProgressBarComponent,
-    RouteCreationComponent
+    ProgressBarComponent 
   ],
   imports: [
     BrowserModule,

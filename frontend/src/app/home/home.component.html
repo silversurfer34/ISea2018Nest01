@@ -1,6 +1,13 @@
 <div class="bandeau">
-  <button mat-raised-button color="primary" class="buttonAdd" (click)="openUploadDialog()"><img src="../assets/add.png" height="24" width="24"></button>
-  <button mat-raised-button color="primary" class="buttonAdd" (click)="creationRoute()"><img src="../assets/map_creation.png" height="24" width="24"></button>
+  <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item (click)="openUploadDialog()">Add trajectory</button>
+      <button mat-menu-item (click)="creationRoute()">Create route</button>
+    </mat-menu>
+    
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    
   <mat-form-field class="filterForm">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
@@ -31,9 +38,9 @@
         <mat-cell *matCellDef="let element">{{getTraceDate(element)}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="launchMapView">
+      <ng-container matColumnDef="deleteTrajectory">
           <mat-header-cell *matHeaderCellDef ></mat-header-cell>
-          <mat-cell *matCellDef="let element"><img src="../assets/seaMap.png" class="iconRoute" height="32" width="32"></mat-cell>
+          <mat-cell *matCellDef="let element"><img src="../assets/delete.png" class="iconRoute" height="24" width="24" (click)="deleteTrajectory(element.name); $event.stopPropagation();"></mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

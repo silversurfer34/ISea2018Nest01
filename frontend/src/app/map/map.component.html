@@ -3,7 +3,7 @@
   [longitude]="longitude" 
   [fitBounds]="globalBounds"
   #gm
-  (mapClick)="clicked($event)"
+  (mapClick)="addMarker($event)"
 >
   <styled-map></styled-map>
   <agm-polyline [strokeColor]="routeColor">
@@ -20,6 +20,13 @@
 </agm-map>
 
 <div class="viewData flex">
+    <mat-form-field  *ngIf="trajectoryName == ''" >
+        <input matInput placeholder="Route name" [(ngModel)]="routeName" type="text" required>
+    </mat-form-field>
   <button mat-raised-button *ngIf="cacheRoutePoints !== undefined&&cacheRoutePoints.length>0" class="routeButton {{materialButtonClass}} {{routeSelected}}" (click)="showOrHideRoute()">route</button>
   <button mat-raised-button *ngIf="cacheTracePoints !== undefined&&cacheTracePoints.length>0" class="traceButton {{materialButtonClass}} {{traceSelected}}" (click)="showOrHideTrace()">trace</button>
+</div>
+
+<div class="divSaveButton flex">
+  <button mat-raised-button [disabled]="!routeEdited||(routeName==''&&trajectoryName=='')" color="primary" class="saveButton" (click)="saveRoute()">save route</button>
 </div>

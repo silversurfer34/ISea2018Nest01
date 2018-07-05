@@ -147,4 +147,14 @@ export class BackendService {
     
     }).catch( err => console.log(err));
   }
+
+  deleteTrajectory (traceName:string)
+  {
+    let me = this; 
+    me.trajectoriesDB.ref.where('name', '==', traceName ).get().then( res => res.forEach(function(doc) {
+      me.trajectoriesDB.doc(doc.id).delete();
+    })).catch(err => console.log(err));
+
+    //me.db.collection<Point>(traceName).
+  }
 }

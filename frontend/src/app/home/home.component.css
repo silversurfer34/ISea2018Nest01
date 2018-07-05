@@ -34,8 +34,8 @@
 }
 
 .mat-row .iconRoute{
-  height:32px;
-  width:32px;
+  height:24px;
+  width:24px;
   margin-right:100px;
 }
 
@@ -71,7 +71,7 @@ border-width: 2px;
   height: 80px;
   display: flex;
   align-items: center;
-
+ left: 20px;
 }
 
 .buttonAdd{
