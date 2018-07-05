@@ -5,6 +5,7 @@ import { BoatTrajectoriesFromDb, Point } from '../datamodel/datamodel';
 import { Store } from '@ngrx/store';
 import { MatTableDataSource, MatPaginator, MatSort} from '@angular/material';
 import { Router } from '@angular/router';
+import { trajectories } from '../+state/app.reducer';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit {
     })
     this.backend.getExistingRoutes();//.subscribe( changed => this.fillDataSource(changed));
     this.store.select('app', 'newItemName').subscribe( newItemName => this.newItemName = newItemName);
-    this.store.select('app', 'trajectoriesFromDb').subscribe( routes => this.fillDataSource(routes));
+    this.store.select(trajectories).subscribe( routes => this.fillDataSource(routes));
   }
 
   /**

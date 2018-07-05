@@ -68,3 +68,15 @@ export function AppReducer(state: App, action: AppAction): App {
     }
   }
 }
+
+export const trajectories = (state: AppState) => state.app.trajectoriesFromDb;
+
+export const trajectoryName = (state: AppState) => state.app.trajectoryName;
+
+export const findAtrajectory = createSelector(
+  trajectories,
+  trajectoryName,
+  (trajectoriesFromDb,trajectoryName) => {
+    return trajectoriesFromDb.find(
+      trajectory => trajectory.name == trajectoryName)
+  });

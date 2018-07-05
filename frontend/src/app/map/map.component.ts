@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../backend/backend.service';
 import { Point, BoatTrajectoriesFromDb } from '../datamodel/datamodel';
 import { Observable } from 'rxjs/observable';
+import { findAtrajectory } from '../+state/app.reducer';
 
 @Component({
   selector: 'app-map',
@@ -25,7 +26,6 @@ export class MapComponent implements OnInit {
   private cacheRoutePoints: Point[];
   private tracePoints: Point[];
   private cacheTracePoints: Point[];
-  private traceRTPoints: Point[];
 
   private newRoute: Point[] = [];
 
@@ -54,8 +54,7 @@ export class MapComponent implements OnInit {
         this.store.dispatch({
           type: 'SET_TRAJECTORY_NAME',
           payload: this.trajectoryName
-        });
-        this.getTrajectoryData();       
+        });     
       }
       else{
         this.store.dispatch({
@@ -67,24 +66,13 @@ export class MapComponent implements OnInit {
     })
     .subscribe();
 
-    this.store.select('app', 'displayedTrajectory').subscribe( displayedRoute => this.handleDisplayedTrajectory(displayedRoute));
+    this.store.select(findAtrajectory).subscribe(displayedRoute => this.handleDisplayedTrajectory(displayedRoute));
     this.clickToogle$ = this.store.select('app', 'clickToogle');
 
     this.backend.getTraceRT(this.trajectoryName);
-    this.store.select('app', 'displayedTraceRT').subscribe( displayedTraceRT => this.handleDisplayedTraceRT(displayedTraceRT));
   }
 
   ngOnInit() {
-  }
-
-  private getTrajectoryData(){
-    this.store.dispatch({
-      type: 'LOAD_ROUTE_DATA_FROM_DB'
-    });
-  }
-
-  private handleDisplayedTraceRT( displayedTraceRT: Point[] ){
-    this.traceRTPoints = displayedTraceRT;
   }
 
   private handleDisplayedTrajectory( displayedTrajectory: BoatTrajectoriesFromDb ){

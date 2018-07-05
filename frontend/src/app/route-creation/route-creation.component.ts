@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Point } from '../datamodel/datamodel';
 import { BackendService } from '../backend/backend.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-route-creation',
@@ -15,6 +16,7 @@ export class RouteCreationComponent implements OnInit {
 
   constructor(
     private backend: BackendService,
+    private router: Router,
     private store : Store<any>) {   
     this.store.dispatch({
       type: 'APP_TITLE_SUFFIX',
@@ -31,6 +33,6 @@ export class RouteCreationComponent implements OnInit {
 
   saveRoute(){
     this.backend.saveRouteCreated(this.routeName, this.route);
-    //redirect
+    this.router.navigateByUrl('/home');
   }
 }
