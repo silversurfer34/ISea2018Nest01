@@ -205,11 +205,13 @@ export class MapComponent implements OnInit {
   }
 
   saveRoute(){
-    this.trajectoryName = this.routeName;
-    this.cacheRoutePoints = this.routePoints;
-    this.backend.saveRouteCreated(this.trajectoryName, this.routePoints);
-    this.routeEdited = false;
-    this.router.navigateByUrl(`/map/${this.trajectoryName}`);
+    if ( this.routeName) {
+      this.trajectoryName = this.routeName;
+      this.cacheRoutePoints = this.routePoints;
+      this.backend.saveRouteCreated(this.trajectoryName, this.routePoints);
+      this.routeEdited = false;
+      this.router.navigateByUrl(`/map/${this.trajectoryName}`);
+    }
   }
 }
 

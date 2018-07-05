@@ -23,14 +23,20 @@ agm-map {
   margin-right: 5px !important;
 }
 
-.saveButton{
-  border: 2px solid; 
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12) !important;
-}
-
 .traceButton.selected{
   background-color: #cc9900;
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12) !important;
+}
+
+.saveButton{
+  border: 2px solid #316296 !important; 
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12) !important;
+}
+
+.saveButton:disabled{
+  color: #7c7c7c !important; 
+  background-color:  #e0e0e0 !important; 
+  border: 2px solid  #e0e0e0 !important; 
 }
 
 .traceButton {
