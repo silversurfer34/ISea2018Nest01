@@ -155,6 +155,10 @@ export class BackendService {
       me.trajectoriesDB.doc(doc.id).delete();
     })).catch(err => console.log(err));
 
-    //me.db.collection<Point>(traceName).
+    this.db.collection<Point>(traceName).ref.get().then( allDocument => { 
+      allDocument.forEach( document => {
+        me.db.collection<Point>(traceName).doc(document.id).delete();
+      }) 
+    });
   }
 }
