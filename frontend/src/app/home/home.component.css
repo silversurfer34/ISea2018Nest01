@@ -88,3 +88,11 @@ border-width: 2px;
 .filterForm{
   margin-left: 20px;
 }
+
+.menuSelected {
+  color: red;
+}
+
+.menuUnselected {
+  color: white;
+}

@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   displayedColumns = ['route', 'trace', 'name', 'date', 'deleteTrajectory'];
   dataSource: MatTableDataSource<BoatTrajectoriesFromDb>;
 
+  menuSelected : string = "menuUnselected";
+
   newItemName: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -108,6 +110,13 @@ export class HomeComponent implements OnInit {
   deleteTrajectory (name:string)
   {
     this.backend.deleteTrajectory(name);
+  }
+
+  openMenu ()
+  {
+    if (this.menuSelected == "menuSelected")
+      this.menuSelected = "menuUnselected"
+    else this.menuSelected = "menuSelected";
   }
 }
 
